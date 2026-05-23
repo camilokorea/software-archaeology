@@ -1,7 +1,9 @@
-# AI Modernization Specs
+# Software Archeology
+
+![Software Archeology icon](software-archeology.png)
 
 ## Project Vision
-AI Modernization Specs is an open-source, AI-native specification framework for enterprise legacy application modernization. This repository defines structured Markdown artifacts for reverse engineering, architecture discovery, modernization assessment, and AI-driven transformation workflows.
+Software Archeology is an open-source, AI-native specification framework for enterprise legacy application modernization. This repository defines structured Markdown artifacts for reverse engineering, architecture discovery, modernization assessment, and AI-driven transformation workflows.
 
 ## Problem Statement
 Legacy applications are difficult to understand, assess, and modernize at enterprise scale. Existing documentation is fragmented, technology-specific, and not optimized for large language models or autonomous analysis agents.
