@@ -1,4 +1,4 @@
-# Contributing to AI Modernization Specs
+# Contributing to Software Archeology
 
 ## Welcome
 Thank you for contributing. This repository is built for enterprise modernization practitioners, AI engineers, and open-source collaborators.
