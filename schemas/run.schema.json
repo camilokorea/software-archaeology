@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run log",
+  "type": "object",
+  "required": [
+    "tool_version",
+    "started_at",
+    "repo",
+    "config",
+    "provider",
+    "prompts",
+    "usage",
+    "phases"
+  ],
+  "properties": {
+    "tool_version": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "repo": {
+      "type": "object"
+    },
+    "config": {
+      "type": "object"
+    },
+    "provider": {
+      "type": "object"
+    },
+    "prompts": {
+      "type": "object",
+      "description": "spec id \u2192 version and content hash, so a run can be repeated"
+    },
+    "usage": {
+      "type": "object",
+      "description": "tokens and estimated cost"
+    },
+    "phases": {
+      "type": "array"
+    },
+    "warnings": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "software-archaeology",
+  "owner": { "name": "Camilo Corea" },
+  "plugins": [
+    {
+      "name": "software-archaeology",
+      "source": "./",
+      "description": "Evidence-first archaeology of legacy codebases, for engineers and the business."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "software-archaeology",
+  "version": "2.0.0",
+  "description": "Evidence-first archaeology of legacy codebases: a technical report for engineers and a business brief for product and project managers.",
+  "author": { "name": "Camilo Corea", "url": "https://naturalcode.dev" },
+  "homepage": "https://github.com/camilokorea/software-archaeology",
+  "repository": "https://github.com/camilokorea/software-archaeology",
+  "license": "MIT",
+  "keywords": ["legacy", "modernization", "reverse-engineering", "architecture", "technical-debt", "agents"]
+}

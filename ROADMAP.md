@@ -1,21 +1,36 @@
 # Roadmap
 
-## v1: Foundation
-- Publish core inventory, architecture, modernization, and security specification artifacts.
-- Establish prompt and template library for AI workflows.
-- Provide enterprise documentation and governance guidance.
+## 2.0 (this release)
 
-## v2: Expanded Coverage
-- Add technology-specific modernization guides for Java, .NET, Node.js, Python.
-- Introduce automated indexing examples and semantic code graph artifacts.
-- Add migration and observability modernization workflows.
+- One command from a clone to two reports (`./dig.sh`, `archaeology dig`), Docker image, local fallback.
+- Deterministic evidence: inventory, dependencies, end of life, known vulnerabilities, secrets, git history,
+  hotspots, entry points, database, tests, DevOps, external systems.
+- Twelve executable specs, structured findings, citation validator, verified vs inferred.
+- Business brief (status, capabilities, risks, 7R options, roadmap, FAQ, glossary) and technical report, with HTML
+  twins, backlog CSV and a container diagram.
+- Providers: none, Anthropic, Ollama; Claude Code plugin and AGENTS.md for any agent.
+- Budget, cost estimate, dry run, cache, incremental runs, per-component analysis of large repositories.
 
-## v3: Agentic Integration
-- Publish agent orchestration patterns and action plans.
-- Add reusable GitHub Actions templates and CI/CD governance playbooks.
-- Extend repository with real-world case studies and domain-specific modernization patterns.
+## Next
 
-## v4: Ecosystem Standard
-- Standardize specification schema for LLM integration and toolchains.
-- Publish open-source adapters for RAG systems and architecture discovery pipelines.
-- Provide enterprise certification guidance for AI-native modernization programs.
+- **Public worked examples** in `examples/`, analyzing open-source legacy applications, with their published
+  reports, and CI that re-runs them on every change. Candidates under review.
+- Reports in Spanish and Portuguese (`output.language`).
+- More providers through an OpenAI-compatible endpoint (Azure OpenAI, vLLM, LM Studio).
+- Optional coverage import (Cobertura, LCOV, JaCoCo) to replace the test/source ratio.
+
+## Planned specs
+
+These areas were sketched in version 1 as placeholders and will be written as executable specs, one by one:
+
+- **Architecture:** clean architecture conformance, CQRS, domain-driven design discovery.
+- **Backend:** background jobs, error handling, message queues, service layer.
+- **Frontend:** component inventory, routing, state management, UI technical debt.
+- **Data:** ORM mapping, query performance.
+- **Security:** authentication and authorization in depth.
+- **DevOps:** Kubernetes and container hardening.
+- **Diagrams:** class diagrams, sequence diagrams, PlantUML export.
+- **Governance:** coding standards, engineering maturity, architecture governance.
+- **AI:** semantic code graph, knowledge graph and RAG index export.
+- **Modernization:** cloud migration readiness, monolith decomposition, framework-specific upgrade guides
+  (AngularJS → Angular, .NET Framework → .NET, Java EE → Spring Boot).

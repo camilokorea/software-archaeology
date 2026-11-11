@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthesis",
+  "description": "The business view, built only from validated findings. Every statement cites the findings behind it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "executive_summary",
+    "capabilities",
+    "risks",
+    "options",
+    "roadmap",
+    "glossary",
+    "faq"
+  ],
+  "properties": {
+    "executive_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "headline",
+        "points",
+        "recommendation"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "green",
+            "amber",
+            "red"
+          ]
+        },
+        "headline": {
+          "type": "string"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "findings"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "findings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Finding ids that support the statement."
+              }
+            }
+          }
+        },
+        "recommendation": {
+          "type": "string"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description",
+          "evidence",
+          "findings"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "file or file:line where the capability lives"
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Finding ids that support the statement."
+          }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "statement",
+          "impact",
+          "probability",
+          "findings"
+        ],
+        "properties": {
+          "statement": {
+            "type": "string"
+          },
+          "impact": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "probability": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Finding ids that support the statement."
+          }
+        }
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "strategy",
+          "summary",
+          "cost",
+          "risk",
+          "weeks",
+          "assumptions",
+          "recommended",
+          "findings"
+        ],
+        "properties": {
+          "strategy": {
+            "enum": [
+              "retain",
+              "rehost",
+              "replatform",
+              "refactor",
+              "rearchitect",
+              "replace",
+              "retire"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          },
+          "cost": {
+            "enum": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ]
+          },
+          "risk": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "weeks": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recommended": {
+            "type": "boolean"
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Finding ids that support the statement."
+          }
+        }
+      }
+    },
+    "roadmap": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "phase",
+          "goal",
+          "weeks",
+          "milestones",
+          "depends_on",
+          "findings"
+        ],
+        "properties": {
+          "phase": {
+            "type": "string"
+          },
+          "goal": {
+            "type": "string"
+          },
+          "weeks": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "milestones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Finding ids that support the statement."
+          }
+        }
+      }
+    },
+    "glossary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "term",
+          "definition"
+        ],
+        "properties": {
+          "term": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question",
+          "answer"
+        ],
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

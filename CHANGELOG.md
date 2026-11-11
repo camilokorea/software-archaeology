@@ -1,6 +1,19 @@
 # Changelog
 
+## 2.0.0
+
+A rewrite: the repository is now a tool you run, not a set of documents to read.
+
+- Added the `archaeology` CLI and `dig.sh`: intake, evidence, rules, AI analysis, validation, synthesis and reports.
+- Added twelve executable specs with front matter, JSON schemas for findings and synthesis, and the analyst and
+  synthesis prompts.
+- Added the business brief and the technical report (Markdown and HTML), backlog CSV, container diagram, run log.
+- Added Anthropic and Ollama providers, the Claude Code plugin (`/software-archaeology:dig`) and AGENTS.md.
+- Added privacy controls, budget and cost estimate, dry run, cache and incremental runs.
+- Added a Dockerfile with tokei and gitleaks, CI, and tests against a synthetic legacy application.
+- Removed the 63 placeholder documents of 1.0; their topics are listed in ROADMAP.md as planned specs.
+- Renamed the project files to "archaeology" consistently and replaced the banner.
+
 ## 1.0.0
-- Initial repository creation.
-- Added inventory, architecture, modernization, security, frontend, backend, database, devops, ai-analysis, governance, diagrams, prompts, templates, docs.
-- Added professional project documentation, contribution guidelines, roadmap, and license.
+
+- Initial repository: placeholder specification documents, prompts and templates.
