@@ -1,0 +1,55 @@
+# archaeology.yaml — every option, with its default. Copy next to where you run `archaeology`, or pass --config.
+
+project:
+  name: null                 # shown in the reports; defaults to the folder name
+  description: null
+
+scope:
+  include: ["**/*"]
+  exclude:                   # added to nothing: this list replaces the default one
+    - "**/.git/**"
+    - "**/node_modules/**"
+    - "**/bower_components/**"
+    - "**/vendor/**"
+    - "**/packages/**"
+    - "**/bin/**"
+    - "**/obj/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/target/**"
+    - "**/*.min.js"
+    - "**/*.map"
+  max_file_kb: 512           # larger files are skipped (generated code, data dumps)
+
+depth: standard              # quick | standard | deep: files per spec and findings per spec
+
+audiences: [technical, business]
+specs: all                   # or a list, e.g. [security, dependencies, architecture]
+
+ai:
+  provider: none             # none | anthropic | ollama | claude-code
+  model: null                # anthropic: claude-opus-5-5 · ollama: qwen2.5-coder:14b
+  effort: medium             # anthropic: low | medium | high | xhigh | max
+  ollama_url: http://localhost:11434
+  max_context_tokens: 60000  # per spec: evidence + source sample
+  temperature: null          # ollama only
+
+budget:
+  max_usd: 5.0               # the run stops calling the model when this would be exceeded
+  price_per_mtok: {input: 4.0, output: 20.0}   # used for estimates; set to your model's prices
+
+privacy:
+  send_source: true          # false: models see evidence summaries only, never code
+  redact: [secrets, emails, phones, ips]
+  pseudonymize_authors: true # "Dev 1", "Dev 2" in reports instead of names
+  never_send: ["**/.env*", "**/*.pem", "**/*.key", "**/*.pfx", "**/*.p12", "**/id_rsa*", "**/secrets.*"]
+
+network:
+  enabled: true              # end-of-life (endoflife.date) and vulnerabilities (osv.dev): only names and versions leave
+  eol: true
+  osv: true
+  timeout_s: 10
+
+output:
+  dir: null                  # default: ./archaeology-output/<repo name> (never inside the analyzed repo)
+  html: true

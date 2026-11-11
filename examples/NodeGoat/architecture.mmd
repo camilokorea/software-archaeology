@@ -1,0 +1,18 @@
+flowchart LR
+  users(["Users"])
+  c["<b>.</b><br/>frontend or Node.js application<br/><i>HTML, JavaScript</i>"]
+  users --> c
+  db_MongoDB[("MongoDB")]
+  db_Redis[("Redis")]
+  x_https_raw_github_com{{"raw.github.com"}}
+  c -.-> x_https_raw_github_com
+  x_https_www_owasp_org{{"www.owasp.org"}}
+  c -.-> x_https_www_owasp_org
+  x_mongodb_mongo{{"mongo"}}
+  c -.-> x_mongodb_mongo
+  x_https_www_khanacademy_org{{"www.khanacademy.org"}}
+  c -.-> x_https_www_khanacademy_org
+  x_https_on_cypress_io{{"on.cypress.io"}}
+  c -.-> x_https_on_cypress_io
+  x_https_code_google_com{{"code.google.com"}}
+  c -.-> x_https_code_google_com

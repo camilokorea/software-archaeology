@@ -1,0 +1,367 @@
+{
+  "executive_summary": {
+    "status": "red",
+    "headline": "The system works, but it carries serious risks that should be handled before any new feature.",
+    "points": [
+      {
+        "text": "Part of the system runs on AngularJS 1.8, which its maker stopped fixing on 2021-12-31.",
+        "findings": [
+          "DEP-001"
+        ]
+      },
+      {
+        "text": "Part of the system runs on Bootstrap 3.3, which its maker stopped fixing on 2019-07-24.",
+        "findings": [
+          "DEP-002"
+        ]
+      },
+      {
+        "text": "angular 1.8, a library the system depends on, has publicly known security flaws.",
+        "findings": [
+          "SEC-001"
+        ]
+      },
+      {
+        "text": "A small set of files absorbs most of the changes and most of the risk.",
+        "findings": [
+          "DEBT-001"
+        ]
+      },
+      {
+        "text": "Nobody has changed this system in years.",
+        "findings": [
+          "RSK-001"
+        ]
+      },
+      {
+        "text": "bootstrap 3.3, a library the system depends on, has publicly known security flaws.",
+        "findings": [
+          "SEC-002"
+        ]
+      }
+    ],
+    "recommendation": "Recommended path: replatform — Upgrade runtimes and frameworks that are past end of life, keeping the architecture. The system is built on AngularJS 1.x, jQuery."
+  },
+  "capabilities": [],
+  "risks": [
+    {
+      "statement": "Part of the system runs on AngularJS 1.8, which its maker stopped fixing on 2021-12-31.",
+      "impact": 5,
+      "probability": 4,
+      "findings": [
+        "DEP-001"
+      ]
+    },
+    {
+      "statement": "Part of the system runs on Bootstrap 3.3, which its maker stopped fixing on 2019-07-24.",
+      "impact": 4,
+      "probability": 4,
+      "findings": [
+        "DEP-002"
+      ]
+    },
+    {
+      "statement": "angular 1.8, a library the system depends on, has publicly known security flaws.",
+      "impact": 4,
+      "probability": 4,
+      "findings": [
+        "SEC-001"
+      ]
+    },
+    {
+      "statement": "A small set of files absorbs most of the changes and most of the risk.",
+      "impact": 3,
+      "probability": 3,
+      "findings": [
+        "DEBT-001"
+      ]
+    },
+    {
+      "statement": "Nobody has changed this system in years.",
+      "impact": 3,
+      "probability": 3,
+      "findings": [
+        "RSK-001"
+      ]
+    },
+    {
+      "statement": "bootstrap 3.3, a library the system depends on, has publicly known security flaws.",
+      "impact": 3,
+      "probability": 4,
+      "findings": [
+        "SEC-002"
+      ]
+    },
+    {
+      "statement": "jquery 3.3, a library the system depends on, has publicly known security flaws.",
+      "impact": 3,
+      "probability": 4,
+      "findings": [
+        "SEC-003"
+      ]
+    }
+  ],
+  "options": [
+    {
+      "strategy": "retain",
+      "summary": "Keep the system as it is and only fix what is urgent (secrets, known vulnerabilities).",
+      "cost": "S",
+      "risk": "high",
+      "weeks": [
+        1,
+        3
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Risk keeps growing while the platform ages"
+      ],
+      "findings": [
+        "DEP-001",
+        "DEP-002",
+        "SEC-001"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "rehost",
+      "summary": "Move the same application to new infrastructure (containers or cloud VMs) without changing its code.",
+      "cost": "S",
+      "risk": "medium",
+      "weeks": [
+        2,
+        6
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 1 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Runtime can be containerized or installed on new servers"
+      ],
+      "findings": [
+        "OPS-001"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "replatform",
+      "summary": "Upgrade runtimes and frameworks that are past end of life, keeping the architecture.",
+      "cost": "M",
+      "risk": "medium",
+      "weeks": [
+        4,
+        8
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 1 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Framework upgrades have a documented path"
+      ],
+      "findings": [
+        "DEP-001",
+        "DEP-002"
+      ],
+      "recommended": true
+    },
+    {
+      "strategy": "refactor",
+      "summary": "Modernize gradually behind the same interfaces (strangler pattern), starting with the hotspots.",
+      "cost": "L",
+      "risk": "medium",
+      "weeks": [
+        5,
+        9
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 1 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Tests are added before each part is moved"
+      ],
+      "findings": [
+        "DEBT-001"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "rearchitect",
+      "summary": "Rebuild on a new architecture, reusing the business rules found in this report.",
+      "cost": "XL",
+      "risk": "high",
+      "weeks": [
+        6,
+        10
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 1 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Requirements are recovered from the code and validated with users"
+      ],
+      "findings": [
+        "DEP-001",
+        "DEP-002",
+        "SEC-001"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "replace",
+      "summary": "Replace with a commercial or open-source product that covers the same capabilities.",
+      "cost": "L",
+      "risk": "high",
+      "weeks": [
+        8,
+        26
+      ],
+      "assumptions": [
+        "A product exists for most capabilities",
+        "Data migration and process changes are the bulk of the work"
+      ],
+      "findings": [],
+      "recommended": false
+    },
+    {
+      "strategy": "retire",
+      "summary": "Switch the system off if its capabilities are no longer needed.",
+      "cost": "S",
+      "risk": "low",
+      "weeks": [
+        1,
+        4
+      ],
+      "assumptions": [
+        "The business confirms nobody depends on it"
+      ],
+      "findings": [
+        "RSK-001"
+      ],
+      "recommended": false
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": "0 · Make it safe",
+      "goal": "Close the urgent risks without changing behavior.",
+      "weeks": [
+        1,
+        3
+      ],
+      "milestones": [
+        "Exposed credentials rotated and removed",
+        "Known vulnerable libraries upgraded",
+        "Builds run in CI"
+      ],
+      "depends_on": [],
+      "findings": [
+        "SEC-001",
+        "SEC-002",
+        "SEC-003",
+        "SEC-004",
+        "OPS-001",
+        "OPS-002"
+      ]
+    },
+    {
+      "phase": "1 · Make it observable and testable",
+      "goal": "Be able to change the system without fear.",
+      "weeks": [
+        2,
+        6
+      ],
+      "milestones": [
+        "Characterization tests around the hotspots",
+        "Logging and health metrics in production",
+        "Business rules in the database cataloged"
+      ],
+      "depends_on": [
+        "0 · Make it safe"
+      ],
+      "findings": [
+        "DEBT-001"
+      ]
+    },
+    {
+      "phase": "2 · Replatform",
+      "goal": "Upgrade runtimes and frameworks that are past end of life, keeping the architecture.",
+      "weeks": [
+        4,
+        8
+      ],
+      "milestones": [
+        "First module moved and in production",
+        "Old and new run side by side with the same results",
+        "Remaining modules scheduled"
+      ],
+      "depends_on": [
+        "1 · Make it observable and testable"
+      ],
+      "findings": [
+        "DEP-001",
+        "DEP-002"
+      ]
+    },
+    {
+      "phase": "3 · Spread the knowledge and retire the old",
+      "goal": "Leave a system more than one person can maintain.",
+      "weeks": [
+        2,
+        4
+      ],
+      "milestones": [
+        "Ownership of each module shared by at least two people",
+        "Old components switched off"
+      ],
+      "depends_on": [
+        "2 · Replatform"
+      ],
+      "findings": [
+        "RSK-001"
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "end of life",
+      "definition": "The date after which the maker of a technology stops publishing fixes, including security fixes."
+    },
+    {
+      "term": "known vulnerability",
+      "definition": "A security flaw that has been published (in OSV, CVE lists), with the affected versions."
+    },
+    {
+      "term": "rehost / replatform / refactor",
+      "definition": "Move as is / upgrade the platform underneath / restructure the code gradually."
+    },
+    {
+      "term": "verified finding",
+      "definition": "A fact produced by a deterministic tool (a manifest, git, a scanner), not by an AI model."
+    },
+    {
+      "term": "inferred finding",
+      "definition": "A conclusion an AI model drew from the evidence; it was checked against the cited code, but should be confirmed."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is the system at risk today?",
+      "answer": "Yes. The first items in the risk list should be handled now."
+    },
+    {
+      "question": "Can we keep it as it is?",
+      "answer": "Only for a short time: keeping it means accepting the risks above."
+    },
+    {
+      "question": "How long would the recommended path take?",
+      "answer": "About 4–8 weeks for a team of 3, plus the first two roadmap phases. These are ranges from the size of the code and the findings, not a commitment."
+    },
+    {
+      "question": "What should we do first?",
+      "answer": "Phase 0 of the roadmap: close exposed secrets and known vulnerabilities, and get builds running automatically."
+    },
+    {
+      "question": "How sure are these findings?",
+      "answer": "All 10 findings are verified by tools (manifests, git history, scanners). Each one links to its evidence."
+    }
+  ]
+}

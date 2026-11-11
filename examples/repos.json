@@ -1,0 +1,12 @@
+[
+  {"name": "eShopModernizing", "url": "https://github.com/dotnet-architecture/eShopModernizing", "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
+   "license": "MIT", "stack": ".NET Framework, ASP.NET MVC and Web Forms, WCF", "why": "Microsoft's own legacy back-office app, published to show modernization paths."},
+  {"name": "carddemo", "url": "https://github.com/aws-samples/aws-mainframe-modernization-carddemo", "commit": "59cc6c2fd7ebd7ef7925cad552a01a4b8b6e4d5e",
+   "license": "Apache-2.0", "stack": "COBOL, CICS, JCL, VSAM", "why": "A mainframe credit-card application published by AWS for modernization demos."},
+  {"name": "jpetstore-6", "url": "https://github.com/mybatis/jpetstore-6", "commit": "c3dbf6f56f6bb0730478b0f38e16ec6dfd204b23",
+   "license": "Apache-2.0", "stack": "Java, Spring, MyBatis, JSP", "why": "The classic pet store, a small and well-known Java web application."},
+  {"name": "angular-phonecat", "url": "https://github.com/angular/angular-phonecat", "commit": "ef6f6eb672ded472b4e442d598f5df40d0e0642c",
+   "license": "MIT", "stack": "AngularJS 1.x", "why": "The official AngularJS tutorial application, a typical end-of-life frontend."},
+  {"name": "NodeGoat", "url": "https://github.com/OWASP/NodeGoat", "commit": "c5cb68a7084e4ae7dcc60e6a98768720a81841e8",
+   "license": "Apache-2.0", "stack": "Node.js, Express, MongoDB", "why": "OWASP's deliberately vulnerable application, to exercise the security analysis."}
+]

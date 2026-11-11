@@ -1,0 +1,120 @@
+{
+  "title": "SpecFindings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "findings",
+    "not_found"
+  ],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "area",
+          "title",
+          "severity",
+          "confidence",
+          "evidence",
+          "technical_impact",
+          "business_impact",
+          "effort",
+          "recommendation",
+          "refs"
+        ],
+        "properties": {
+          "area": {
+            "enum": [
+              "inventory",
+              "dependencies",
+              "architecture",
+              "database",
+              "api",
+              "security",
+              "testing",
+              "tech-debt",
+              "devops",
+              "risk",
+              "capabilities",
+              "people"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "info"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file",
+                "line",
+                "excerpt"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer"
+                },
+                "excerpt": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "technical_impact": {
+            "type": "string"
+          },
+          "business_impact": {
+            "type": "string"
+          },
+          "effort": {
+            "enum": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ]
+          },
+          "recommendation": {
+            "type": "string"
+          },
+          "refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "not_found": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Checklist items the spec asked about that the evidence does not show. Saying so is correct; guessing is not."
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/camilokorea/software-archaeology/schemas/finding.schema.json",
+  "title": "Finding",
+  "description": "One fact about the codebase, with its evidence, its technical meaning and its business meaning.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "spec",
+    "area",
+    "title",
+    "severity",
+    "kind",
+    "confidence",
+    "evidence",
+    "technical_impact",
+    "business_impact",
+    "effort",
+    "recommendation"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[0-9]{3,}$"
+    },
+    "spec": {
+      "type": "string"
+    },
+    "area": {
+      "enum": [
+        "inventory",
+        "dependencies",
+        "architecture",
+        "database",
+        "api",
+        "security",
+        "testing",
+        "tech-debt",
+        "devops",
+        "risk",
+        "capabilities",
+        "people"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 160
+    },
+    "severity": {
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "verified",
+        "inferred"
+      ],
+      "description": "verified: produced by a deterministic tool. inferred: produced by a model reading the evidence."
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "file",
+          "line"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Path relative to the analyzed repository root."
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "1-based line; 0 when the evidence is the whole file."
+          },
+          "end_line": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "excerpt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Verbatim text from that line range (redacted). The validator checks it."
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Tool or spec that produced the evidence."
+          }
+        }
+      }
+    },
+    "technical_impact": {
+      "type": "string",
+      "minLength": 10
+    },
+    "business_impact": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Plain language, no jargon: what it means for users, money, time or risk."
+    },
+    "effort": {
+      "enum": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    },
+    "recommendation": {
+      "type": "string",
+      "minLength": 10
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Standards or sources: OWASP A03:2021, CWE-798, endoflife.date, OSV id\u2026"
+    }
+  }
+}

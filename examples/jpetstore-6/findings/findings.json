@@ -1,0 +1,223 @@
+[
+  {
+    "id": "SEC-001",
+    "spec": "security",
+    "area": "security",
+    "title": "spring-web 5.3.39 has 2 known vulnerabilities",
+    "severity": "critical",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "pom.xml",
+        "line": 132,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-4gc7-5j7h-4qph, GHSA-4wrc-f8pq-fpqp for this exact version. Spring Framework DataBinder Case Sensitive Match Exception; Pivotal Spring Framework contains unsafe Java deserialization methods",
+    "business_impact": "spring-web 5.3.39, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade org.springframework:spring-web to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-4gc7-5j7h-4qph",
+      "https://osv.dev/vulnerability/GHSA-4wrc-f8pq-fpqp"
+    ]
+  },
+  {
+    "id": "DEP-001",
+    "spec": "dependencies",
+    "area": "dependencies",
+    "title": "Spring Framework 5.3.39 is past its end of life (2024-08-31)",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "pom.xml",
+        "line": 116,
+        "end_line": null,
+        "excerpt": null,
+        "source": "endoflife.date"
+      }
+    ],
+    "technical_impact": "Release cycle 5.3 of spring-framework gets no security or bug fixes since 2024-08-31. The newest cycle is 7.0.",
+    "business_impact": "Part of the system runs on Spring Framework 5.3.39, which its maker stopped fixing on 2024-08-31. New security holes will stay open, and auditors and insurers usually flag this.",
+    "effort": "L",
+    "recommendation": "Plan an upgrade of Spring Framework to a supported release (7.0 or another supported cycle).",
+    "tags": [
+      "end-of-life"
+    ],
+    "refs": [
+      "https://endoflife.date/spring-framework"
+    ]
+  },
+  {
+    "id": "SEC-002",
+    "spec": "security",
+    "area": "security",
+    "title": "spring-webmvc 5.3.39 has 16 known vulnerabilities",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "pom.xml",
+        "line": 137,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-3chg-m5w7-qfv5, GHSA-4773-3jfm-qmx3, GHSA-6hcq-hmm3-jj3c, GHSA-6p4f-wcwh-5vvm, GHSA-72pg-x5f8-j25j, GHSA-957g-f97v-vppc… for this exact version. Spring Framework Cross-site Scripting via JavaScriptUtils; Spring Framework Improper Path Limitation with Script View Templates",
+    "business_impact": "spring-webmvc 5.3.39, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "M",
+    "recommendation": "Upgrade org.springframework:spring-webmvc to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-3chg-m5w7-qfv5",
+      "https://osv.dev/vulnerability/GHSA-4773-3jfm-qmx3",
+      "https://osv.dev/vulnerability/GHSA-6hcq-hmm3-jj3c",
+      "https://osv.dev/vulnerability/GHSA-6p4f-wcwh-5vvm",
+      "https://osv.dev/vulnerability/GHSA-72pg-x5f8-j25j"
+    ]
+  },
+  {
+    "id": "DEBT-001",
+    "spec": "tech-debt",
+    "area": "tech-debt",
+    "title": "8 complex files change far more often than the rest",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "src/test/java/org/mybatis/jpetstore/service/OrderServiceTest.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 28 branches, 20 commits"
+      },
+      {
+        "file": "src/test/java/org/mybatis/jpetstore/service/CatalogServiceTest.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 25 branches, 20 commits"
+      },
+      {
+        "file": "src/test/java/org/mybatis/jpetstore/service/AccountServiceTest.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 14 branches, 19 commits"
+      },
+      {
+        "file": ".mvn/wrapper/MavenWrapperDownloader.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 11 branches, 15 commits"
+      },
+      {
+        "file": "src/test/java/org/mybatis/jpetstore/ScreenTransitionIT.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 7 branches, 21 commits"
+      },
+      {
+        "file": "src/test/java/org/mybatis/jpetstore/domain/CartTest.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 17 branches, 8 commits"
+      },
+      {
+        "file": "src/main/java/org/mybatis/jpetstore/service/OrderService.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 7 branches, 16 commits"
+      },
+      {
+        "file": "src/test/java/org/mybatis/jpetstore/web/controllers/CartControllerTest.java",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 20 branches, 4 commits"
+      }
+    ],
+    "technical_impact": "These files combine high branching with frequent edits: the places where defects and merge conflicts concentrate.",
+    "business_impact": "A small set of files absorbs most of the changes and most of the risk. Every new feature that touches them costs more and breaks more often.",
+    "effort": "L",
+    "recommendation": "Cover these files with tests first, then split them along their responsibilities before any larger migration.",
+    "tags": [
+      "hotspot"
+    ],
+    "refs": []
+  },
+  {
+    "id": "DEP-002",
+    "spec": "dependencies",
+    "area": "dependencies",
+    "title": "Java 11 reaches end of life on 2027-10-31",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "pom.xml",
+        "line": 62,
+        "end_line": null,
+        "excerpt": null,
+        "source": "endoflife.date"
+      }
+    ],
+    "technical_impact": "Release cycle 11 of eclipse-temurin stops receiving fixes within a year.",
+    "business_impact": "Within a year, Java will stop getting security fixes. Upgrading now is cheaper than in a hurry later.",
+    "effort": "M",
+    "recommendation": "Schedule the upgrade of Java before 2027-10-31.",
+    "tags": [
+      "end-of-life"
+    ],
+    "refs": [
+      "https://endoflife.date/eclipse-temurin"
+    ]
+  },
+  {
+    "id": "SEC-003",
+    "spec": "security",
+    "area": "security",
+    "title": "spring-context 5.3.39 has 2 known vulnerabilities",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "pom.xml",
+        "line": 116,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-4gc7-5j7h-4qph, GHSA-4wp7-92pw-q264 for this exact version. Spring Framework DataBinder Case Sensitive Match Exception; Spring Framework DataBinder Case Sensitive Match Exception",
+    "business_impact": "spring-context 5.3.39, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade org.springframework:spring-context to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-4gc7-5j7h-4qph",
+      "https://osv.dev/vulnerability/GHSA-4wp7-92pw-q264"
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - name: Schemas and specs load
+        run: archaeology specs
+      - name: Plugin manifests are valid JSON
+        run: python -m json.tool .claude-plugin/plugin.json >/dev/null && python -m json.tool .claude-plugin/marketplace.json >/dev/null
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker build -t software-archaeology:ci .
+      - run: docker run --rm software-archaeology:ci specs
+      - name: Image has its tools
+        run: docker run --rm --entrypoint sh software-archaeology:ci -c "tokei --version && gitleaks version"
+
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - name: The published examples still reproduce
+        run: python examples/build.py --check --workdir "$RUNNER_TEMP/repos"

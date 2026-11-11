@@ -1,0 +1,135 @@
+Summary,Description,Issue Type,Priority,Labels,Component,Story Points,Finding ID
+[SEC-001] underscore 1.8.3 has 2 known vulnerabilities,"Upgrade underscore to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-cf4h-3jhx-xvhq, GHSA-qpx9-hpmf-5gmw for this exact version. Arbitrary Code Execution in underscore; Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack
+
+Business impact: underscore 1.8.3, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:23
+
+(verified, confidence high)",Task,Highest,archaeology security vulnerability,security,2,SEC-001
+"[SEC-002] Hard-coded password, secret or API key found in 3 file(s)","Rotate these credentials now, move them to a secrets store (environment, vault), and purge them from the git history.
+
+Why: Credentials are committed to the source tree. Anyone with read access to the repository, its history or a backup can use them.
+
+Business impact: Passwords or keys are written inside the code. Whoever gets a copy of the code gets access to the systems those keys open.
+
+Evidence:
+- app/views/tutorial/a2.html:153
+- app/views/tutorial/a3.html:176
+- artifacts/db-reset.js:18
+- artifacts/db-reset.js:19
+- artifacts/db-reset.js:27
+- artifacts/db-reset.js:28
+- artifacts/db-reset.js:35
+- artifacts/db-reset.js:36
+
+(verified, confidence high)",Task,High,archaeology security secret,security,2,SEC-002
+[SEC-003] body-parser 1.15.1 has 3 known vulnerabilities,"Upgrade body-parser to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-27r3-jxmh-p828, GHSA-qwcr-r2fm-qrc7, GHSA-v422-hmwv-36x6 for this exact version. body-parser vulnerable to Denial of Service via trailing bytes after a compressed request body; body-parser vulnerable to denial of service when url encoding is enabled
+
+Business impact: body-parser 1.15.1, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:9
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,5,SEC-003
+[SEC-004] marked 0.3.5 has 6 known vulnerabilities,"Upgrade marked to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-5v2h-r2cx-5xgj, GHSA-7px7-7xjx-hxm8, GHSA-p9wx-2529-fp83, GHSA-rrrm-qjm4-v8hf, GHSA-vfvf-mqq8-rwqc, GHSA-x5pg-88wf-qq4p for this exact version. Inefficient Regular Expression Complexity in marked; Marked vulnerable to XSS from data URIs
+
+Business impact: marked 0.3.5, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:17
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,5,SEC-004
+[SEC-005] mongodb 2.1.18 has 1 known vulnerability,"Upgrade mongodb to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-mh5c-679w-hh4r for this exact version. Denial of Service in mongodb
+
+Business impact: mongodb 2.1.18, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:18
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,2,SEC-005
+[SEC-006] swig 1.4.2 has 1 known vulnerability,"Upgrade swig to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-2rq5-699j-x7p6 for this exact version. Arbitrary local file read vulnerability during template rendering
+
+Business impact: swig 1.4.2, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:22
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,2,SEC-006
+[DEBT-001] 8 complex files change far more often than the rest,"Cover these files with tests first, then split them along their responsibilities before any larger migration.
+
+Why: These files combine high branching with frequent edits: the places where defects and merge conflicts concentrate.
+
+Business impact: A small set of files absorbs most of the changes and most of the risk. Every new feature that touches them costs more and breaks more often.
+
+Evidence:
+- app/routes/session.js
+- server.js
+- app/routes/profile.js
+- app/data/profile-dao.js
+- app/data/user-dao.js
+- app/data/allocations-dao.js
+- Gruntfile.js
+- test/security/profile-test.js
+
+(verified, confidence high)",Task,Medium,archaeology tech-debt hotspot,tech-debt,13,DEBT-001
+[RSK-001] No changes since 2023-06-21,"Before planning changes, prove the system still builds and runs in a clean environment.
+
+Why: The last commit is more than two years old; the build tools and dependencies have likely drifted.
+
+Business impact: Nobody has changed this system in years. Even small fixes will first need someone to make it build and run again.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,Medium,archaeology risk dormant,risk,5,RSK-001
+[SEC-007] async 2.0.0 has 1 known vulnerability (development dependency),"Upgrade async to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-fwr7-v2mv-hh25 for this exact version. Prototype Pollution in async
+
+Business impact: async 2.0.0, a tool used to build or test the system, has publicly known security flaws. It does not run in production, but it can affect developers' machines and the build.
+
+Evidence:
+- package.json:42
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,2,SEC-007
+[SEC-008] express 4.13.4 has 2 known vulnerabilities,"Upgrade express to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-qw6h-vgh9-j6wx, GHSA-rv95-896h-c2vc for this exact version. express vulnerable to XSS via response.redirect(); Express.js Open Redirect in malformed URLs
+
+Business impact: express 4.13.4, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:13
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,2,SEC-008
+[SEC-009] grunt 1.0.3 has 3 known vulnerabilities (development dependency),"Upgrade grunt to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-j383-35pm-c5h4, GHSA-m5pj-vjjf-4m3h, GHSA-rm36-94g8-835r for this exact version. Path Traversal in Grunt; Arbitrary Code Execution in grunt
+
+Business impact: grunt 1.0.3, a tool used to build or test the system, has publicly known security flaws. It does not run in production, but it can affect developers' machines and the build.
+
+Evidence:
+- package.json:45
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,5,SEC-009
+[OPS-001] No logging or monitoring library detected,"Add structured logging and basic health metrics before any migration, to compare before and after.
+
+Why: No known logging, tracing or metrics library is declared in the manifests or configuration.
+
+Business impact: When something fails in production it is hard to know what happened or how often.
+
+Evidence:
+- package.json
+
+(verified, confidence high)",Task,Low,archaeology devops observability,devops,2,OPS-001

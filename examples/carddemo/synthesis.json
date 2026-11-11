@@ -1,0 +1,323 @@
+{
+  "executive_summary": {
+    "status": "amber",
+    "headline": "The system is maintainable today, with risks that will grow if nothing is done.",
+    "points": [
+      {
+        "text": "An important part of the system uses CICS, a technology that is hard to hire for and cannot be upgraded in place.",
+        "findings": [
+          "ARC-001"
+        ]
+      },
+      {
+        "text": "Nothing checks automatically that the system still works after a change.",
+        "findings": [
+          "TST-001"
+        ]
+      },
+      {
+        "text": "A small set of files absorbs most of the changes and most of the risk.",
+        "findings": [
+          "DEBT-001"
+        ]
+      },
+      {
+        "text": "Builds and releases depend on someone's machine and memory, which makes them slow and error-prone.",
+        "findings": [
+          "OPS-001"
+        ]
+      }
+    ],
+    "recommendation": "Recommended path: refactor — Modernize gradually behind the same interfaces (strangler pattern), starting with the hotspots. The system is built on CICS, COBOL, JCL batch."
+  },
+  "capabilities": [],
+  "risks": [
+    {
+      "statement": "An important part of the system uses CICS, a technology that is hard to hire for and cannot be upgraded in place.",
+      "impact": 4,
+      "probability": 3,
+      "findings": [
+        "ARC-001"
+      ]
+    },
+    {
+      "statement": "Nothing checks automatically that the system still works after a change.",
+      "impact": 4,
+      "probability": 4,
+      "findings": [
+        "TST-001"
+      ]
+    },
+    {
+      "statement": "A small set of files absorbs most of the changes and most of the risk.",
+      "impact": 3,
+      "probability": 3,
+      "findings": [
+        "DEBT-001"
+      ]
+    },
+    {
+      "statement": "Builds and releases depend on someone's machine and memory, which makes them slow and error-prone.",
+      "impact": 3,
+      "probability": 3,
+      "findings": [
+        "OPS-001"
+      ]
+    }
+  ],
+  "options": [
+    {
+      "strategy": "retain",
+      "summary": "Keep the system as it is and only fix what is urgent (secrets, known vulnerabilities).",
+      "cost": "S",
+      "risk": "high",
+      "weeks": [
+        1,
+        3
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Risk keeps growing while the platform ages"
+      ],
+      "findings": [
+        "ARC-001",
+        "TST-001"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "rehost",
+      "summary": "Move the same application to new infrastructure (containers or cloud VMs) without changing its code.",
+      "cost": "S",
+      "risk": "medium",
+      "weeks": [
+        3,
+        8
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 48 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Runtime can be containerized or installed on new servers"
+      ],
+      "findings": [
+        "OPS-002"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "replatform",
+      "summary": "Upgrade runtimes and frameworks that are past end of life, keeping the architecture.",
+      "cost": "M",
+      "risk": "medium",
+      "weeks": [
+        7,
+        17
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 48 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Framework upgrades have a documented path"
+      ],
+      "findings": [],
+      "recommended": false
+    },
+    {
+      "strategy": "refactor",
+      "summary": "Modernize gradually behind the same interfaces (strangler pattern), starting with the hotspots.",
+      "cost": "L",
+      "risk": "medium",
+      "weeks": [
+        19,
+        43
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 48 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Tests are added before each part is moved"
+      ],
+      "findings": [
+        "ARC-001",
+        "TST-001",
+        "DEBT-001",
+        "DEBT-002"
+      ],
+      "recommended": true
+    },
+    {
+      "strategy": "rearchitect",
+      "summary": "Rebuild on a new architecture, reusing the business rules found in this report.",
+      "cost": "XL",
+      "risk": "high",
+      "weeks": [
+        48,
+        105
+      ],
+      "assumptions": [
+        "Team of 3 developers familiar with the stack",
+        "Size: about 48 thousand lines of code",
+        "Ranges are ±50% and come from size and findings, not from a detailed plan",
+        "Requirements are recovered from the code and validated with users"
+      ],
+      "findings": [
+        "ARC-001",
+        "ARC-001",
+        "TST-001"
+      ],
+      "recommended": false
+    },
+    {
+      "strategy": "replace",
+      "summary": "Replace with a commercial or open-source product that covers the same capabilities.",
+      "cost": "L",
+      "risk": "high",
+      "weeks": [
+        8,
+        26
+      ],
+      "assumptions": [
+        "A product exists for most capabilities",
+        "Data migration and process changes are the bulk of the work"
+      ],
+      "findings": [],
+      "recommended": false
+    },
+    {
+      "strategy": "retire",
+      "summary": "Switch the system off if its capabilities are no longer needed.",
+      "cost": "S",
+      "risk": "high",
+      "weeks": [
+        1,
+        4
+      ],
+      "assumptions": [
+        "The business confirms nobody depends on it"
+      ],
+      "findings": [],
+      "recommended": false
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": "0 · Make it safe",
+      "goal": "Close the urgent risks without changing behavior.",
+      "weeks": [
+        1,
+        3
+      ],
+      "milestones": [
+        "Exposed credentials rotated and removed",
+        "Known vulnerable libraries upgraded",
+        "Builds run in CI"
+      ],
+      "depends_on": [],
+      "findings": [
+        "OPS-001",
+        "OPS-002",
+        "OPS-003"
+      ]
+    },
+    {
+      "phase": "1 · Make it observable and testable",
+      "goal": "Be able to change the system without fear.",
+      "weeks": [
+        2,
+        6
+      ],
+      "milestones": [
+        "Characterization tests around the hotspots",
+        "Logging and health metrics in production",
+        "Business rules in the database cataloged"
+      ],
+      "depends_on": [
+        "0 · Make it safe"
+      ],
+      "findings": [
+        "TST-001",
+        "DEBT-001",
+        "DEBT-002"
+      ]
+    },
+    {
+      "phase": "2 · Refactor",
+      "goal": "Modernize gradually behind the same interfaces (strangler pattern), starting with the hotspots.",
+      "weeks": [
+        19,
+        43
+      ],
+      "milestones": [
+        "First module moved and in production",
+        "Old and new run side by side with the same results",
+        "Remaining modules scheduled"
+      ],
+      "depends_on": [
+        "1 · Make it observable and testable"
+      ],
+      "findings": [
+        "ARC-001",
+        "TST-001",
+        "DEBT-001",
+        "DEBT-002"
+      ]
+    },
+    {
+      "phase": "3 · Spread the knowledge and retire the old",
+      "goal": "Leave a system more than one person can maintain.",
+      "weeks": [
+        2,
+        4
+      ],
+      "milestones": [
+        "Ownership of each module shared by at least two people",
+        "Old components switched off"
+      ],
+      "depends_on": [
+        "2 · Refactor"
+      ],
+      "findings": []
+    }
+  ],
+  "glossary": [
+    {
+      "term": "continuous integration",
+      "definition": "A service that builds and tests the system automatically on every change."
+    },
+    {
+      "term": "rehost / replatform / refactor",
+      "definition": "Move as is / upgrade the platform underneath / restructure the code gradually."
+    },
+    {
+      "term": "verified finding",
+      "definition": "A fact produced by a deterministic tool (a manifest, git, a scanner), not by an AI model."
+    },
+    {
+      "term": "inferred finding",
+      "definition": "A conclusion an AI model drew from the evidence; it was checked against the cited code, but should be confirmed."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is the system at risk today?",
+      "answer": "Not immediately, but the risks listed grow every month."
+    },
+    {
+      "question": "Can we keep it as it is?",
+      "answer": "Only for a short time: keeping it means accepting the risks above."
+    },
+    {
+      "question": "How long would the recommended path take?",
+      "answer": "About 19–43 weeks for a team of 3, plus the first two roadmap phases. These are ranges from the size of the code and the findings, not a commitment."
+    },
+    {
+      "question": "What should we do first?",
+      "answer": "Phase 0 of the roadmap: close exposed secrets and known vulnerabilities, and get builds running automatically."
+    },
+    {
+      "question": "How sure are these findings?",
+      "answer": "All 7 findings are verified by tools (manifests, git history, scanners). Each one links to its evidence."
+    }
+  ]
+}

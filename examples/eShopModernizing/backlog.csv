@@ -1,0 +1,209 @@
+Summary,Description,Issue Type,Priority,Labels,Component,Story Points,Finding ID
+[DEP-001] .NET Framework 4.6.1 is past its end of life (2022-04-26),"Plan an upgrade of .NET Framework to a supported release (4.8.1 or another supported cycle).
+
+Why: Release cycle 4.6 of dotnetfx gets no security or bug fixes since 2022-04-26. The newest cycle is 4.8.1.
+
+Business impact: Part of the system runs on .NET Framework 4.6.1, which its maker stopped fixing on 2022-04-26. New security holes will stay open, and auditors and insurers usually flag this.
+
+Evidence:
+- eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj:12
+
+(verified, confidence high)",Task,Highest,archaeology dependencies end-of-life,dependencies,13,DEP-001
+[SEC-001] Private key found in 1 file(s),"Rotate these credentials now, move them to a secrets store (environment, vault), and purge them from the git history.
+
+Why: Credentials are committed to the source tree. Anyone with read access to the repository, its history or a backup can use them.
+
+Business impact: Passwords or keys are written inside the code. Whoever gets a copy of the code gets access to the systems those keys open.
+
+Evidence:
+- VM/DockerCerts-Generation/CreateDockerCerts.ps1:60
+- VM/DockerCerts-Generation/CreateDockerCerts.ps1:91
+
+(verified, confidence high)",Task,Highest,archaeology security secret,security,2,SEC-001
+[ARC-001] Built on ASP.NET Web Forms,"Treat leaving ASP.NET Web Forms as its own track in the roadmap, screen by screen or service by service.
+
+Why: Web Forms has no successor in modern .NET; pages must be rebuilt (Razor, Blazor or a SPA).
+
+Business impact: An important part of the system uses ASP.NET Web Forms, a technology that is hard to hire for and cannot be upgraded in place. Moving off it is a project, not an update.
+
+Evidence:
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/About.aspx
+
+(verified, confidence high)",Task,High,archaeology architecture legacy-platform,architecture,21,ARC-001
+[ARC-002] Built on WCF / ASMX web services,"Treat leaving WCF / ASMX web services as its own track in the roadmap, screen by screen or service by service.
+
+Why: WCF server and ASMX are not available in modern .NET; services must be ported (CoreWCF, REST, gRPC).
+
+Business impact: An important part of the system uses WCF / ASMX web services, a technology that is hard to hire for and cannot be upgraded in place. Moving off it is a project, not an update.
+
+Evidence:
+- eShopLegacyNTier/src/eShopWCFService/CatalogService.svc
+
+(verified, confidence high)",Task,High,archaeology architecture legacy-platform,architecture,13,ARC-002
+[DEP-002] Bootstrap 4.3.1 is past its end of life (2023-01-01),"Plan an upgrade of Bootstrap to a supported release (5 or another supported cycle).
+
+Why: Release cycle 4 of bootstrap gets no security or bug fixes since 2023-01-01. The newest cycle is 5.
+
+Business impact: Part of the system runs on Bootstrap 4.3.1, which its maker stopped fixing on 2023-01-01. New security holes will stay open, and auditors and insurers usually flag this.
+
+Evidence:
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/packages.config:6
+
+(verified, confidence high)",Task,High,archaeology dependencies end-of-life,dependencies,13,DEP-002
+"[SEC-002] Newtonsoft.Json 12.0.1 has 1 known vulnerability, declared in 3 places","Upgrade Newtonsoft.Json to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-5crp-9r3c-p9vr for this exact version. Improper Handling of Exceptional Conditions in Newtonsoft.Json
+
+Business impact: Newtonsoft.Json 12.0.1, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/packages.config:29
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/packages.config:31
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj:102
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,2,SEC-002
+[SEC-003] Newtonsoft.Json 6.0.4 has 1 known vulnerability,"Upgrade Newtonsoft.Json to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-5crp-9r3c-p9vr for this exact version. Improper Handling of Exceptional Conditions in Newtonsoft.Json
+
+Business impact: Newtonsoft.Json 6.0.4, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- eShopLegacyNTier/src/eShopWinForms/packages.config:5
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,2,SEC-003
+[SEC-004] Password inside a connection string found in 20 file(s),"Rotate these credentials now, move them to a secrets store (environment, vault), and purge them from the git history.
+
+Why: Credentials are committed to the source tree. Anyone with read access to the repository, its history or a backup can use them.
+
+Business impact: Passwords or keys are written inside the code. Whoever gets a copy of the code gets access to the systems those keys open.
+
+Evidence:
+- docker-compose.override.yml:6
+- docker-compose.override.yml:21
+- docker-compose.override.yml:36
+- Kubernetes/eShopModernizedMVC-K8s/ServiceDeployments/eshop-modernized-mvc-k8s-services-CD-deployment.yml:25
+- Kubernetes/eShopModernizedMVC-K8s/ServiceDeployments/eshop-modernized-mvc-k8s-services-deployment.yml:25
+- Kubernetes/eShopModernizedNTier-WCF-K8s/eshop-wcf-container-deployment.yml:25
+- Kubernetes/eShopModernizedWebForms-K8s/eshop-modernized-webforms-k8s-services-CD-deployment.yml:25
+- Kubernetes/eShopModernizedWebForms-K8s/eshop-modernized-webforms-k8s-services-deployment.yml:29
+- Kubernetes-DockerForWindows/eShopModernizedMVC-K8s/eshop-modernized-mvc-k8s-compose.yml:10
+- Kubernetes-DockerForWindows/eShopModernizedMVC-K8s/eshop-modernized-mvc-k8s-services-deployment.yml:25
+
+(verified, confidence high)",Task,High,archaeology security secret,security,2,SEC-004
+[TST-001] No automated tests were found,"Before modernizing, add characterization tests around the most used features and the hotspots.
+
+Why: 0 test files for 194,551 lines of source code. Regressions can only be caught by hand.
+
+Business impact: Nothing checks automatically that the system still works after a change. Every change, and especially a migration, needs slow manual testing and still risks breaking things.
+
+Evidence:
+- ServiceFabric/eShopModernizedMVC-ServiceFabricApp/packages.config
+- ServiceFabric/eShopModernizedSQL_ServiceFabricApp/packages.config
+- ServiceFabric/eShopModernizedWebForms-ServiceApp/packages.config
+
+(verified, confidence high)",Task,High,archaeology testing no-tests,testing,13,TST-001
+[DEBT-001] 8 complex files change far more often than the rest,"Cover these files with tests first, then split them along their responsibilities before any larger migration.
+
+Why: These files combine high branching with frequent edits: the places where defects and merge conflicts concentrate.
+
+Business impact: A small set of files absorbs most of the changes and most of the risk. Every new feature that touches them costs more and breaks more often.
+
+Evidence:
+- eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.js
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.js
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.js
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/bootstrap.bundle.js
+- eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Scripts/bootstrap.bundle.js
+- eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.slim.js
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.slim.js
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.slim.js
+
+(verified, confidence high)",Task,Medium,archaeology tech-debt hotspot,tech-debt,13,DEBT-001
+[OPS-001] No continuous integration pipeline found,"Add a pipeline that builds and runs the tests on every change.
+
+Why: No CI definition (GitHub Actions, Azure Pipelines, Jenkins, GitLab…) builds or tests the code on each change.
+
+Business impact: Builds and releases depend on someone's machine and memory, which makes them slow and error-prone.
+
+Evidence:
+- ServiceFabric/eShopModernizedMVC-ServiceFabricApp/packages.config
+- ServiceFabric/eShopModernizedSQL_ServiceFabricApp/packages.config
+- ServiceFabric/eShopModernizedWebForms-ServiceApp/packages.config
+
+(verified, confidence high)",Task,Medium,archaeology devops ci,devops,2,OPS-001
+[RSK-001] No changes since 2023-10-25,"Before planning changes, prove the system still builds and runs in a clean environment.
+
+Why: The last commit is more than two years old; the build tools and dependencies have likely drifted.
+
+Business impact: Nobody has changed this system in years. Even small fixes will first need someone to make it build and run again.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,Medium,archaeology risk dormant,risk,5,RSK-001
+"[SEC-005] Microsoft.IdentityModel.JsonWebTokens 5.6.0 has 1 known vulnerability, declared in 2 places","Upgrade Microsoft.IdentityModel.JsonWebTokens to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-59j7-ghrg-fj52 for this exact version. Microsoft ASP.NET Core project templates vulnerable to denial of service
+
+Business impact: Microsoft.IdentityModel.JsonWebTokens 5.6.0, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config:51
+- eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:53
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,2,SEC-005
+"[SEC-006] System.IdentityModel.Tokens.Jwt 5.6.0 has 1 known vulnerability, declared in 2 places","Upgrade System.IdentityModel.Tokens.Jwt to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-59j7-ghrg-fj52 for this exact version. Microsoft ASP.NET Core project templates vulnerable to denial of service
+
+Business impact: System.IdentityModel.Tokens.Jwt 5.6.0, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config:97
+- eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:98
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,2,SEC-006
+"[SEC-007] log4net 2.0.10 has 1 known vulnerability, declared in 5 places","Upgrade log4net to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-4f7c-pmjv-c25w for this exact version. Apache Log4net: Silent log event loss in XmlLayout and XmlLayoutSchemaLog4J due to unescaped XML 1.0 forbidden characters
+
+Business impact: log4net 2.0.10, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/packages.config:10
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/packages.config:11
+- eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:11
+- eShopLegacyMVCSolution/eShopPorted/eShopPorted.csproj:13
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj:242
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,2,SEC-007
+[SEC-008] log4net 2.0.12 has 1 known vulnerability,"Upgrade log4net to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-4f7c-pmjv-c25w for this exact version. Apache Log4net: Silent log event loss in XmlLayout and XmlLayoutSchemaLog4J due to unescaped XML 1.0 forbidden characters
+
+Business impact: log4net 2.0.12, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config:10
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,2,SEC-008
+"[DEBT-002] 10 source files exceed 1,500 lines of code","Break these files apart when they are next changed, guided by tests.
+
+Why: Very large files usually hold several responsibilities, are hard to test and to review.
+
+Business impact: Some parts of the code are too big for one person to understand quickly, which slows every change.
+
+Evidence:
+- eShopModernizedMVCSolution/src/eShopModernizedMVC/Scripts/jquery-3.4.1.js
+- eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Scripts/jquery-3.4.1.js
+- eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.js
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.js
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.js
+- eShopModernizedMVCSolution/src/eShopModernizedMVC/Scripts/jquery-3.4.1.slim.js
+- eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Scripts/jquery-3.4.1.slim.js
+- eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.slim.js
+- eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.slim.js
+- eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.slim.js
+
+(verified, confidence high)",Task,Low,archaeology tech-debt size,tech-debt,5,DEBT-002

@@ -1,0 +1,6 @@
+[
+  "devops | low | No logging or monitoring library detected | package.json",
+  "risk | medium | No changes since 2023-06-21 | .",
+  "security | high | Hard-coded password, secret or API key found in 3 file(s) | app/views/tutorial/a2.html, app/views/tutorial/a3.html, artifacts/db-reset.js",
+  "tech-debt | medium | 8 complex files change far more often than the rest | Gruntfile.js, app/data/allocations-dao.js, app/data/profile-dao.js, app/data/user-dao.js, app/routes/profile.js, app/routes/session.js, server.js, test/security/profile-test.js"
+]

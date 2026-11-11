@@ -1,0 +1,6 @@
+.git
+.venv
+archaeology-output
+**/__pycache__
+*.png
+tests

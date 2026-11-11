@@ -1,0 +1,170 @@
+{
+  "tool_version": "2.0.0",
+  "started_at": "2026-11-11T02:37:36.306799+00:00",
+  "finished_at": "2026-11-11T02:37:39.477172+00:00",
+  "repo": {
+    "url": "https://github.com/mybatis/jpetstore-6",
+    "commit": "c3dbf6f56f6bb0730478b0f38e16ec6dfd204b23"
+  },
+  "config": {
+    "project": {
+      "name": "jpetstore-6",
+      "description": null
+    },
+    "scope": {
+      "include": [
+        "**/*"
+      ],
+      "exclude": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/vendor/**",
+        "**/packages/**",
+        "**/bin/**",
+        "**/obj/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/target/**",
+        "**/.venv/**",
+        "**/venv/**",
+        "**/__pycache__/**",
+        "**/*.min.js",
+        "**/*.min.css",
+        "**/*.map",
+        "**/.archaeology/**"
+      ],
+      "max_file_kb": 512
+    },
+    "depth": "standard",
+    "audiences": [
+      "technical",
+      "business"
+    ],
+    "specs": "all",
+    "ai": {
+      "provider": "none",
+      "model": null,
+      "effort": "medium",
+      "ollama_url": "http://localhost:11434",
+      "max_context_tokens": 60000,
+      "temperature": null
+    },
+    "privacy": {
+      "send_source": true,
+      "redact": [
+        "secrets",
+        "emails",
+        "phones",
+        "ips"
+      ],
+      "pseudonymize_authors": true,
+      "never_send": [
+        "**/.env*",
+        "**/*.pem",
+        "**/*.key",
+        "**/*.pfx",
+        "**/*.p12",
+        "**/id_rsa*",
+        "**/secrets.*"
+      ]
+    },
+    "network": {
+      "enabled": true,
+      "eol": true,
+      "osv": true,
+      "timeout_s": 10
+    },
+    "budget": {
+      "max_usd": 5.0,
+      "price_per_mtok": {
+        "input": 4.0,
+        "output": 20.0
+      }
+    }
+  },
+  "provider": {
+    "name": "none",
+    "model": null,
+    "effort": "medium"
+  },
+  "prompts": {
+    "inventory": {
+      "version": "1.0.0",
+      "hash": "dfec492fe9365d83"
+    },
+    "dependencies": {
+      "version": "1.0.0",
+      "hash": "5740b3925005d38d"
+    },
+    "architecture": {
+      "version": "1.0.0",
+      "hash": "553eb563b7041627"
+    },
+    "database": {
+      "version": "1.0.0",
+      "hash": "ddff80ae071392ec"
+    },
+    "api": {
+      "version": "1.0.0",
+      "hash": "536b27de4c8697f3"
+    },
+    "security": {
+      "version": "1.0.0",
+      "hash": "a2484da34bf1230e"
+    },
+    "testing": {
+      "version": "1.0.0",
+      "hash": "73cc98cb798eca3f"
+    },
+    "tech-debt": {
+      "version": "1.0.0",
+      "hash": "53160a4bf1726d98"
+    },
+    "devops": {
+      "version": "1.0.0",
+      "hash": "1ad833207d82ebc6"
+    },
+    "capabilities": {
+      "version": "1.0.0",
+      "hash": "ece46f3c6319a253"
+    },
+    "people": {
+      "version": "1.0.0",
+      "hash": "f9cdf60e525a963c"
+    },
+    "risk": {
+      "version": "1.0.0",
+      "hash": "cb71ca399505725a"
+    }
+  },
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "calls": 0,
+    "estimated_usd": 0.0
+  },
+  "phases": [
+    {
+      "phase": "0 · intake",
+      "seconds": 0.0,
+      "ok": true
+    },
+    {
+      "phase": "1 · evidence",
+      "seconds": 2.5,
+      "ok": true
+    },
+    {
+      "phase": "3 · validation and synthesis",
+      "seconds": 0.0,
+      "ok": true
+    },
+    {
+      "phase": "4 · reports",
+      "seconds": 0.0,
+      "ok": true
+    }
+  ],
+  "warnings": []
+}

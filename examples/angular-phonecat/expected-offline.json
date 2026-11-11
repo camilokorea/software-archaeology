@@ -1,0 +1,6 @@
+[
+  "devops | low | No container or infrastructure-as-code definitions | package.json",
+  "devops | low | No logging or monitoring library detected | package.json",
+  "risk | medium | No changes since 2020-06-05 | .",
+  "tech-debt | medium | 5 complex files change far more often than the rest | app/app.animations.js, app/app.config.js, app/core/checkmark/checkmark.filter.js, app/phone-list/phone-list.component.spec.js, e2e-tests/scenarios.js"
+]
