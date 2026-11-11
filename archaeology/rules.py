@@ -73,13 +73,21 @@ def _vulnerabilities(items: list[dict]) -> list[dict]:
         sevs = [OSV_SEVERITY.get(str(d.get("severity") or "").upper()) for d in v.get("details", [])]
         order = ["critical", "high", "medium", "low"]
         sev = next((s for s in order if s in sevs), "medium")
+        dev = v.get("scope") == "dev"
+        if dev:  # build and test tools do not run in production: one level lower
+            sev = order[min(order.index(sev) + 1, len(order) - 1)]
+        places = v.get("declared_in") or [{"file": v["file"], "line": v["line"]}]
         summary = "; ".join(d["summary"] for d in v.get("details", [])[:2] if d.get("summary"))
         out.append(finding(
             spec="security", area="security",
-            title=f"{_short(v['name'])} {v['version']} has {len(v['ids'])} known vulnerabilit{'y' if len(v['ids']) == 1 else 'ies'}",
-            severity=sev, evidence=[ev(v["file"], v["line"], None, "osv.dev")],
+            title=f"{_short(v['name'])} {v['version']} has {len(v['ids'])} known vulnerabilit{'y' if len(v['ids']) == 1 else 'ies'}"
+                  + (" (development dependency)" if dev else "") + (f", declared in {len(places)} places" if len(places) > 1 else ""),
+            severity=sev, evidence=[ev(p["file"], p["line"], None, "osv.dev") for p in places[:10]],
             technical_impact=f"OSV lists {', '.join(v['ids'][:6])}{'…' if len(v['ids']) > 6 else ''} for this exact version. {summary}".strip(),
-            business_impact=f"{_short(v['name'])} {v['version']}, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+            business_impact=(f"{_short(v['name'])} {v['version']}, a tool used to build or test the system, has publicly known security flaws. "
+                             "It does not run in production, but it can affect developers' machines and the build."
+                             if dev else f"{_short(v['name'])} {v['version']}, a library the system depends on, has publicly known security flaws. "
+                             "Attackers read these lists too."),
             recommendation=f"Upgrade {v['name']} to a version without these advisories and re-test the features that use it.",
             effort="S" if len(v["ids"]) < 3 else "M", refs=[f"https://osv.dev/vulnerability/{i}" for i in v["ids"][:5]], tags=["vulnerability"]))
     return out

@@ -1,0 +1,18 @@
+flowchart LR
+  users(["Users"])
+  c["<b>.</b><br/>web application (server-rendered)<br/><i>Java, JSP, SQL</i>"]
+  users --> c
+  db_HSQLDB[("HSQLDB")]
+  c --> db_HSQLDB
+  x_http_mybatis_org{{"mybatis.org"}}
+  c -.-> x_http_mybatis_org
+  x_https_spring_io{{"spring.io"}}
+  c -.-> x_https_spring_io
+  x_https_repo_maven_apache_org{{"repo.maven.apache.org"}}
+  c -.-> x_https_repo_maven_apache_org
+  x_http_cloc_sourceforge_net{{"cloc.sourceforge.net"}}
+  c -.-> x_http_cloc_sourceforge_net
+  x_https_repo1_maven_org{{"repo1.maven.org"}}
+  c -.-> x_https_repo1_maven_org
+  x_http_projects_spring_io{{"projects.spring.io"}}
+  c -.-> x_http_projects_spring_io

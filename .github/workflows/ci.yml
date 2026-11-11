@@ -34,3 +34,14 @@ jobs:
       - run: docker run --rm software-archaeology:ci specs
       - name: Image has its tools
         run: docker run --rm --entrypoint sh software-archaeology:ci -c "tokei --version && gitleaks version"
+
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - name: The published examples still reproduce
+        run: python examples/build.py --check --workdir "$RUNNER_TEMP/repos"

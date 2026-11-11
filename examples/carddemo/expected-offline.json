@@ -1,0 +1,9 @@
+[
+  "architecture | high | Built on CICS | app/app-authorization-ims-db2-mq/cbl/COPAUA0C.cbl",
+  "devops | low | No container or infrastructure-as-code definitions | .",
+  "devops | low | No logging or monitoring library detected | .",
+  "devops | medium | No continuous integration pipeline found | .",
+  "tech-debt | low | 3 source files exceed 1,500 lines of code | app/app-transaction-type-db2/cbl/COTRTLIC.cbl, app/app-transaction-type-db2/cbl/COTRTUPC.cbl, app/cbl/COACTUPC.cbl",
+  "tech-debt | medium | 8 complex files change far more often than the rest | app/app-transaction-type-db2/cbl/COTRTLIC.cbl, app/app-transaction-type-db2/cbl/COTRTUPC.cbl, app/cbl/CBACT04C.cbl, app/cbl/CBTRN01C.cbl, app/cbl/CBTRN02C.cbl, app/cbl/CBTRN03C.cbl, app/cbl/COACTUPC.cbl, app/cbl/COCRDUPC.cbl",
+  "testing | high | No automated tests were found | ."
+]

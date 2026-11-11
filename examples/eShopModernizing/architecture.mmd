@@ -1,0 +1,40 @@
+flowchart LR
+  users(["Users"])
+  c_ServiceFabric_eShopModernizedMVC_Servi["<b>ServiceFabric/eShopModernizedMVC-ServiceFabricApp</b><br/>application or library<br/><i>PowerShell</i>"]
+  c_ServiceFabric_eShopModernizedSQL_Servi["<b>ServiceFabric/eShopModernizedSQL_ServiceFabricApp</b><br/>database scripts<br/><i>PowerShell</i>"]
+  c_ServiceFabric_eShopModernizedWebForms_["<b>ServiceFabric/eShopModernizedWebForms-ServiceApp</b><br/>application or library<br/><i>PowerShell</i>"]
+  c_eShopLegacyMVCSolution_eShopLegacy_Uti["<b>eShopLegacyMVCSolution/eShopLegacy.Utilities</b><br/>application or library<br/><i>C#</i>"]
+  c_eShopLegacyMVCSolution_eShopPorted["<b>eShopLegacyMVCSolution/eShopPorted</b><br/>web application (server-rendered)<br/><i>JavaScript, CSS, C#</i>"]
+  c_eShopLegacyMVCSolution_src_eShopLegacy["<b>eShopLegacyMVCSolution/src/eShopLegacyMVC</b><br/>web application (server-rendered)<br/><i>JavaScript, CSS, C#</i>"]
+  c_eShopLegacyNTier_src_eShopWCFService["<b>eShopLegacyNTier/src/eShopWCFService</b><br/>application or library<br/><i>C#</i>"]
+  c_eShopLegacyNTier_src_eShopWinForms["<b>eShopLegacyNTier/src/eShopWinForms</b><br/>application or library<br/><i>C#</i>"]
+  c_eShopLegacyWebFormsSolution_src_eShopL["<b>eShopLegacyWebFormsSolution/src/eShopLegacyWebForms</b><br/>web application (server-rendered)<br/><i>JavaScript, CSS, C#</i>"]
+  c_eShopModernizedMVCSolution_src_eShopMo["<b>eShopModernizedMVCSolution/src/eShopModernizedMVC</b><br/>web application (server-rendered)<br/><i>JavaScript, CSS, C#</i>"]
+  c_eShopModernizedNTier_src_eShopWCFServi["<b>eShopModernizedNTier/src/eShopWCFService</b><br/>application or library<br/><i>C#</i>"]
+  c_eShopModernizedNTier_src_eShopWinForms["<b>eShopModernizedNTier/src/eShopWinForms</b><br/>application or library<br/><i>C#</i>"]
+  c_eShopModernizedWebFormsSolution_src_eS["<b>eShopModernizedWebFormsSolution/src/eShopModernizedWebForms</b><br/>web application (server-rendered)<br/><i>JavaScript, CSS, C#</i>"]
+  users --> c_eShopLegacyMVCSolution_eShopPorted
+  users --> c_eShopLegacyMVCSolution_src_eShopLegacy
+  users --> c_eShopLegacyWebFormsSolution_src_eShopL
+  users --> c_eShopModernizedMVCSolution_src_eShopMo
+  users --> c_eShopModernizedWebFormsSolution_src_eS
+  db_SQL_Server[("SQL Server")]
+  c_ServiceFabric_eShopModernizedMVC_Servi --> db_SQL_Server
+  db_Redis[("Redis")]
+  c_ServiceFabric_eShopModernizedMVC_Servi --> db_Redis
+  db_MySQL[("MySQL")]
+  c_ServiceFabric_eShopModernizedMVC_Servi --> db_MySQL
+  q_RabbitMQ[/"RabbitMQ"/]
+  c_ServiceFabric_eShopModernizedMVC_Servi -.-> q_RabbitMQ
+  q_Azure_Service_Bus[/"Azure Service Bus"/]
+  c_ServiceFabric_eShopModernizedMVC_Servi -.-> q_Azure_Service_Bus
+  x_http_releases_k8s_io{{"releases.k8s.io"}}
+  x_http_kubernetes_io{{"kubernetes.io"}}
+  x_https_jqueryvalidation_org{{"jqueryvalidation.org"}}
+  c_eShopLegacyMVCSolution_eShopPorted -.-> x_https_jqueryvalidation_org
+  x_http_docs_jquery_com{{"docs.jquery.com"}}
+  c_eShopLegacyMVCSolution_eShopPorted -.-> x_http_docs_jquery_com
+  x_https_html_spec_whatwg_org{{"html.spec.whatwg.org"}}
+  c_eShopLegacyMVCSolution_eShopPorted -.-> x_https_html_spec_whatwg_org
+  x_https_promisesaplus_com{{"promisesaplus.com"}}
+  c_eShopLegacyMVCSolution_eShopPorted -.-> x_https_promisesaplus_com

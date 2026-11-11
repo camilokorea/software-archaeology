@@ -50,6 +50,11 @@ The run stops before exceeding `budget.max_usd` (default 5 USD) and records mode
 Other agents (Copilot, Cursor, Codex…): follow [AGENTS.md](AGENTS.md). The agent does the reading; the CLI collects
 the evidence and validates every citation.
 
+## Examples
+
+Five public legacy applications analyzed, with both reports: .NET Framework (eShopModernizing), COBOL/CICS (CardDemo),
+Java/Spring (JPetStore), AngularJS (angular-phonecat) and Node.js (NodeGoat). See [examples/](examples/).
+
 ## What you get
 
 | File | For | What |

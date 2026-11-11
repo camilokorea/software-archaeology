@@ -1,0 +1,105 @@
+Summary,Description,Issue Type,Priority,Labels,Component,Story Points,Finding ID
+[DEP-001] AngularJS 1.8 is past its end of life (2021-12-31),"Plan an upgrade of AngularJS to a supported release (1.8 or another supported cycle).
+
+Why: Release cycle 1.8 of angularjs gets no security or bug fixes since 2021-12-31. The newest cycle is 1.8.
+
+Business impact: Part of the system runs on AngularJS 1.8, which its maker stopped fixing on 2021-12-31. New security holes will stay open, and auditors and insurers usually flag this.
+
+Evidence:
+- package.json:9
+
+(verified, confidence high)",Task,Highest,archaeology dependencies end-of-life,dependencies,13,DEP-001
+[DEP-002] Bootstrap 3.3 is past its end of life (2019-07-24),"Plan an upgrade of Bootstrap to a supported release (5 or another supported cycle).
+
+Why: Release cycle 3 of bootstrap gets no security or bug fixes since 2019-07-24. The newest cycle is 5.
+
+Business impact: Part of the system runs on Bootstrap 3.3, which its maker stopped fixing on 2019-07-24. New security holes will stay open, and auditors and insurers usually flag this.
+
+Evidence:
+- package.json:13
+
+(verified, confidence high)",Task,High,archaeology dependencies end-of-life,dependencies,13,DEP-002
+[SEC-001] angular 1.8 has 10 known vulnerabilities,"Upgrade angular to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-2qqx-w9hr-q5gx, GHSA-2vrf-hf26-jrp5, GHSA-4w4v-5hc9-xrr2, GHSA-7x27-g8rg-x87w, GHSA-j58c-ww9w-pwp5, GHSA-m2h2-264f-f486… for this exact version. angular vulnerable to regular expression denial of service via the $resource service; angular vulnerable to regular expression denial of service via the angular.copy() utility
+
+Business impact: angular 1.8, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:9
+
+(verified, confidence high)",Task,High,archaeology security vulnerability,security,5,SEC-001
+[DEBT-001] 5 complex files change far more often than the rest,"Cover these files with tests first, then split them along their responsibilities before any larger migration.
+
+Why: These files combine high branching with frequent edits: the places where defects and merge conflicts concentrate.
+
+Business impact: A small set of files absorbs most of the changes and most of the risk. Every new feature that touches them costs more and breaks more often.
+
+Evidence:
+- e2e-tests/scenarios.js
+- app/app.animations.js
+- app/phone-list/phone-list.component.spec.js
+- app/app.config.js
+- app/core/checkmark/checkmark.filter.js
+
+(verified, confidence high)",Task,Medium,archaeology tech-debt hotspot,tech-debt,13,DEBT-001
+[RSK-001] No changes since 2020-06-05,"Before planning changes, prove the system still builds and runs in a clean environment.
+
+Why: The last commit is more than two years old; the build tools and dependencies have likely drifted.
+
+Business impact: Nobody has changed this system in years. Even small fixes will first need someone to make it build and run again.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,Medium,archaeology risk dormant,risk,5,RSK-001
+[SEC-002] bootstrap 3.3 has 7 known vulnerabilities,"Upgrade bootstrap to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-3mgp-fx93-9xv5, GHSA-3wqf-4x89-9g79, GHSA-4p24-vmcr-4gqj, GHSA-7mvr-5x2g-wfc8, GHSA-9v3m-8fp8-mj99, GHSA-ph58-4vrj-w6hr… for this exact version. XSS vulnerability that affects bootstrap; Bootstrap vulnerable to Cross-Site Scripting (XSS)
+
+Business impact: bootstrap 3.3, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:13
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,5,SEC-002
+[SEC-003] jquery 3.3 has 3 known vulnerabilities,"Upgrade jquery to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-6c3j-c64m-qhgq, GHSA-gxr4-xjj5-5px2, GHSA-jpcq-cgw6-v4j6 for this exact version. XSS in jQuery as used in Drupal, Backdrop CMS, and other products; Potential XSS vulnerability in jQuery
+
+Business impact: jquery 3.3, a library the system depends on, has publicly known security flaws. Attackers read these lists too.
+
+Evidence:
+- package.json:14
+
+(verified, confidence high)",Task,Medium,archaeology security vulnerability,security,5,SEC-003
+[OPS-001] No container or infrastructure-as-code definitions,"Describe the runtime in a Dockerfile or IaC as a first, low-risk modernization step.
+
+Why: The runtime environment is not described in code, so it cannot be recreated automatically.
+
+Business impact: Setting up a new server or a test environment is manual work that only a few people know how to do.
+
+Evidence:
+- package.json
+
+(verified, confidence high)",Task,Low,archaeology devops environment,devops,5,OPS-001
+[OPS-002] No logging or monitoring library detected,"Add structured logging and basic health metrics before any migration, to compare before and after.
+
+Why: No known logging, tracing or metrics library is declared in the manifests or configuration.
+
+Business impact: When something fails in production it is hard to know what happened or how often.
+
+Evidence:
+- package.json
+
+(verified, confidence high)",Task,Low,archaeology devops observability,devops,2,OPS-002
+[SEC-004] karma 3.1.4 has 2 known vulnerabilities (development dependency),"Upgrade karma to a version without these advisories and re-test the features that use it.
+
+Why: OSV lists GHSA-7x7c-qm48-pq9c, GHSA-rc3x-jf5g-xvc5 for this exact version. Cross-site Scripting in karma; Open redirect in karma
+
+Business impact: karma 3.1.4, a tool used to build or test the system, has publicly known security flaws. It does not run in production, but it can affect developers' machines and the build.
+
+Evidence:
+- package.json:21
+
+(verified, confidence high)",Task,Low,archaeology security vulnerability,security,2,SEC-004

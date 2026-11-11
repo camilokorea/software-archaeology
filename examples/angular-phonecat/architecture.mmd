@@ -1,0 +1,16 @@
+flowchart LR
+  users(["Users"])
+  c["<b>.</b><br/>frontend or Node.js application<br/><i>JavaScript, HTML, CSS</i>"]
+  users --> c
+  x_https_registry_npmjs_org{{"registry.npmjs.org"}}
+  c -.-> x_https_registry_npmjs_org
+  x_http_registry_npmjs_org{{"registry.npmjs.org"}}
+  c -.-> x_http_registry_npmjs_org
+  x_http_www_google_com{{"www.google.com"}}
+  c -.-> x_http_www_google_com
+  x_http_google_com{{"google.com"}}
+  c -.-> x_http_google_com
+  x_https_docs_angularjs_org{{"docs.angularjs.org"}}
+  c -.-> x_https_docs_angularjs_org
+  x_http_code_jquery_com{{"code.jquery.com"}}
+  c -.-> x_http_code_jquery_com

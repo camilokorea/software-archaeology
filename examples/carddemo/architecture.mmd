@@ -1,0 +1,8 @@
+flowchart LR
+  users(["Users"])
+  c["<b>.</b><br/>mainframe programs<br/><i>COBOL, COBOL copybook, BMS (CICS maps)</i>"]
+  users --> c
+  db_VSAM[("VSAM")]
+  c --> db_VSAM
+  db_DB2[("DB2")]
+  c --> db_DB2

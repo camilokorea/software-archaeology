@@ -10,11 +10,11 @@
   twins, backlog CSV and a container diagram.
 - Providers: none, Anthropic, Ollama; Claude Code plugin and AGENTS.md for any agent.
 - Budget, cost estimate, dry run, cache, incremental runs, per-component analysis of large repositories.
+- Five public examples (.NET Framework, COBOL/CICS, Java, AngularJS, Node.js) with CI that checks they reproduce.
 
 ## Next
 
-- **Public worked examples** in `examples/`, analyzing open-source legacy applications, with their published
-  reports, and CI that re-runs them on every change. Candidates under review.
+- Examples re-generated with AI analysis, side by side with the deterministic ones.
 - Reports in Spanish and Portuguese (`output.language`).
 - More providers through an OpenAI-compatible endpoint (Azure OpenAI, vLLM, LM Studio).
 - Optional coverage import (Cobertura, LCOV, JaCoCo) to replace the test/source ratio.

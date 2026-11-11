@@ -17,7 +17,7 @@ def _git(repo: Path, *args: str) -> str:
 def scan(repo: Path, files: set[str], pseudonymize: bool = True, max_commits: int = 20000) -> dict:
     if not (repo / ".git").exists() or not _git(repo, "rev-parse", "HEAD"):
         return {"available": False}
-    log = _git(repo, "log", "--no-merges", f"-n{max_commits}", "--format=@@%H|%an|%at", "--numstat")
+    log = _git(repo, "log", "--no-merges", f"-n{max_commits}", "--format=@@%H|%an|%ct", "--numstat")
     churn: Counter = Counter()
     authors_of: dict[str, Counter] = defaultdict(Counter)
     last_change: dict[str, int] = {}
@@ -62,8 +62,8 @@ def scan(repo: Path, files: set[str], pseudonymize: bool = True, max_commits: in
     concentrated = [f for f in per_file if f["top_author_share"] >= 0.8 and f["commits"] >= 3]
     owners_of_concentrated = Counter(f["top_author"] for f in concentrated)
     head = _git(repo, "rev-parse", "HEAD").strip()
-    first = _git(repo, "log", "--reverse", "--format=%at", "-n1").strip()
-    last = _git(repo, "log", "-n1", "--format=%at").strip()
+    first = _git(repo, "log", "--reverse", "--format=%ct").strip().split("\n")[0]
+    last = _git(repo, "log", "-n1", "--format=%ct").strip()
     shallow = _git(repo, "rev-parse", "--is-shallow-repository").strip() == "true"
     return {
         "available": True,

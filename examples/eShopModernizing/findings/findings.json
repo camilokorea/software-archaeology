@@ -1,0 +1,732 @@
+[
+  {
+    "id": "DEP-001",
+    "spec": "dependencies",
+    "area": "dependencies",
+    "title": ".NET Framework 4.6.1 is past its end of life (2022-04-26)",
+    "severity": "critical",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj",
+        "line": 12,
+        "end_line": null,
+        "excerpt": null,
+        "source": "endoflife.date"
+      }
+    ],
+    "technical_impact": "Release cycle 4.6 of dotnetfx gets no security or bug fixes since 2022-04-26. The newest cycle is 4.8.1.",
+    "business_impact": "Part of the system runs on .NET Framework 4.6.1, which its maker stopped fixing on 2022-04-26. New security holes will stay open, and auditors and insurers usually flag this.",
+    "effort": "L",
+    "recommendation": "Plan an upgrade of .NET Framework to a supported release (4.8.1 or another supported cycle).",
+    "tags": [
+      "end-of-life"
+    ],
+    "refs": [
+      "https://endoflife.date/dotnetfx"
+    ]
+  },
+  {
+    "id": "SEC-001",
+    "spec": "security",
+    "area": "security",
+    "title": "Private key found in 1 file(s)",
+    "severity": "critical",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "VM/DockerCerts-Generation/CreateDockerCerts.ps1",
+        "line": 60,
+        "end_line": null,
+        "excerpt": "Value    = (\"[REDACTED-SECRET]`n\" + [System.Convert]::ToBase64String($privateKeyFromCert.Key.Export([System.Security.Cryptography.CngKeyBlobFormat]::Pkcs8PrivateBlob), [System.Base64FormattingOptions]",
+        "source": "built-in rules"
+      },
+      {
+        "file": "VM/DockerCerts-Generation/CreateDockerCerts.ps1",
+        "line": 91,
+        "end_line": null,
+        "excerpt": "Value    = (\"[REDACTED-SECRET]`n\" + [System.Convert]::ToBase64String($clientprivateKeyFromCert.Key.Export([System.Security.Cryptography.CngKeyBlobFormat]::Pkcs8PrivateBlob), [System.Base64FormattingOp",
+        "source": "built-in rules"
+      }
+    ],
+    "technical_impact": "Credentials are committed to the source tree. Anyone with read access to the repository, its history or a backup can use them.",
+    "business_impact": "Passwords or keys are written inside the code. Whoever gets a copy of the code gets access to the systems those keys open.",
+    "effort": "S",
+    "recommendation": "Rotate these credentials now, move them to a secrets store (environment, vault), and purge them from the git history.",
+    "tags": [
+      "secret"
+    ],
+    "refs": [
+      "CWE-798",
+      "OWASP A07:2021"
+    ]
+  },
+  {
+    "id": "ARC-001",
+    "spec": "architecture",
+    "area": "architecture",
+    "title": "Built on ASP.NET Web Forms",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/About.aspx",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      }
+    ],
+    "technical_impact": "Web Forms has no successor in modern .NET; pages must be rebuilt (Razor, Blazor or a SPA).",
+    "business_impact": "An important part of the system uses ASP.NET Web Forms, a technology that is hard to hire for and cannot be upgraded in place. Moving off it is a project, not an update.",
+    "effort": "XL",
+    "recommendation": "Treat leaving ASP.NET Web Forms as its own track in the roadmap, screen by screen or service by service.",
+    "tags": [
+      "legacy-platform"
+    ],
+    "refs": []
+  },
+  {
+    "id": "ARC-002",
+    "spec": "architecture",
+    "area": "architecture",
+    "title": "Built on WCF / ASMX web services",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyNTier/src/eShopWCFService/CatalogService.svc",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      }
+    ],
+    "technical_impact": "WCF server and ASMX are not available in modern .NET; services must be ported (CoreWCF, REST, gRPC).",
+    "business_impact": "An important part of the system uses WCF / ASMX web services, a technology that is hard to hire for and cannot be upgraded in place. Moving off it is a project, not an update.",
+    "effort": "L",
+    "recommendation": "Treat leaving WCF / ASMX web services as its own track in the roadmap, screen by screen or service by service.",
+    "tags": [
+      "legacy-platform"
+    ],
+    "refs": []
+  },
+  {
+    "id": "DEP-002",
+    "spec": "dependencies",
+    "area": "dependencies",
+    "title": "Bootstrap 4.3.1 is past its end of life (2023-01-01)",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/packages.config",
+        "line": 6,
+        "end_line": null,
+        "excerpt": null,
+        "source": "endoflife.date"
+      }
+    ],
+    "technical_impact": "Release cycle 4 of bootstrap gets no security or bug fixes since 2023-01-01. The newest cycle is 5.",
+    "business_impact": "Part of the system runs on Bootstrap 4.3.1, which its maker stopped fixing on 2023-01-01. New security holes will stay open, and auditors and insurers usually flag this.",
+    "effort": "L",
+    "recommendation": "Plan an upgrade of Bootstrap to a supported release (5 or another supported cycle).",
+    "tags": [
+      "end-of-life"
+    ],
+    "refs": [
+      "https://endoflife.date/bootstrap"
+    ]
+  },
+  {
+    "id": "SEC-002",
+    "spec": "security",
+    "area": "security",
+    "title": "Newtonsoft.Json 12.0.1 has 1 known vulnerability, declared in 3 places",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/packages.config",
+        "line": 29,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/packages.config",
+        "line": 31,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj",
+        "line": 102,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-5crp-9r3c-p9vr for this exact version. Improper Handling of Exceptional Conditions in Newtonsoft.Json",
+    "business_impact": "Newtonsoft.Json 12.0.1, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade Newtonsoft.Json to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-5crp-9r3c-p9vr"
+    ]
+  },
+  {
+    "id": "SEC-003",
+    "spec": "security",
+    "area": "security",
+    "title": "Newtonsoft.Json 6.0.4 has 1 known vulnerability",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyNTier/src/eShopWinForms/packages.config",
+        "line": 5,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-5crp-9r3c-p9vr for this exact version. Improper Handling of Exceptional Conditions in Newtonsoft.Json",
+    "business_impact": "Newtonsoft.Json 6.0.4, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade Newtonsoft.Json to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-5crp-9r3c-p9vr"
+    ]
+  },
+  {
+    "id": "SEC-004",
+    "spec": "security",
+    "area": "security",
+    "title": "Password inside a connection string found in 20 file(s)",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "docker-compose.override.yml",
+        "line": 6,
+        "end_line": null,
+        "excerpt": "- CatalogDBContext=Server=sql.data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]",
+        "source": "built-in rules"
+      },
+      {
+        "file": "docker-compose.override.yml",
+        "line": 21,
+        "end_line": null,
+        "excerpt": "- CatalogDBContext=Server=sql.data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]",
+        "source": "built-in rules"
+      },
+      {
+        "file": "docker-compose.override.yml",
+        "line": 36,
+        "end_line": null,
+        "excerpt": "- CatalogDBContext=Server=sql.data;Database=eShopDatabase;User Id=sa;Password=[REDACTED-SECRET]",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes/eShopModernizedMVC-K8s/ServiceDeployments/eshop-modernized-mvc-k8s-services-CD-deployment.yml",
+        "line": 25,
+        "end_line": null,
+        "excerpt": "value: \"Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]\"",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes/eShopModernizedMVC-K8s/ServiceDeployments/eshop-modernized-mvc-k8s-services-deployment.yml",
+        "line": 25,
+        "end_line": null,
+        "excerpt": "value: \"Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]\"",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes/eShopModernizedNTier-WCF-K8s/eshop-wcf-container-deployment.yml",
+        "line": 25,
+        "end_line": null,
+        "excerpt": "value: \"Server=sql-data-for-wcf;Database=eShopDatabase;User Id=sa;Password=[REDACTED-SECRET]\"",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes/eShopModernizedWebForms-K8s/eshop-modernized-webforms-k8s-services-CD-deployment.yml",
+        "line": 25,
+        "end_line": null,
+        "excerpt": "value: \"Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]\"",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes/eShopModernizedWebForms-K8s/eshop-modernized-webforms-k8s-services-deployment.yml",
+        "line": 29,
+        "end_line": null,
+        "excerpt": "value: \"Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]\"",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes-DockerForWindows/eShopModernizedMVC-K8s/eshop-modernized-mvc-k8s-compose.yml",
+        "line": 10,
+        "end_line": null,
+        "excerpt": "- ConnectionString=Server=sql.data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]",
+        "source": "built-in rules"
+      },
+      {
+        "file": "Kubernetes-DockerForWindows/eShopModernizedMVC-K8s/eshop-modernized-mvc-k8s-services-deployment.yml",
+        "line": 25,
+        "end_line": null,
+        "excerpt": "value: \"Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=[REDACTED-SECRET]\"",
+        "source": "built-in rules"
+      }
+    ],
+    "technical_impact": "Credentials are committed to the source tree. Anyone with read access to the repository, its history or a backup can use them.",
+    "business_impact": "Passwords or keys are written inside the code. Whoever gets a copy of the code gets access to the systems those keys open.",
+    "effort": "S",
+    "recommendation": "Rotate these credentials now, move them to a secrets store (environment, vault), and purge them from the git history.",
+    "tags": [
+      "secret"
+    ],
+    "refs": [
+      "CWE-798",
+      "OWASP A07:2021"
+    ]
+  },
+  {
+    "id": "TST-001",
+    "spec": "testing",
+    "area": "testing",
+    "title": "No automated tests were found",
+    "severity": "high",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "ServiceFabric/eShopModernizedMVC-ServiceFabricApp/packages.config",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      },
+      {
+        "file": "ServiceFabric/eShopModernizedSQL_ServiceFabricApp/packages.config",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      },
+      {
+        "file": "ServiceFabric/eShopModernizedWebForms-ServiceApp/packages.config",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      }
+    ],
+    "technical_impact": "0 test files for 194,551 lines of source code. Regressions can only be caught by hand.",
+    "business_impact": "Nothing checks automatically that the system still works after a change. Every change, and especially a migration, needs slow manual testing and still risks breaking things.",
+    "effort": "L",
+    "recommendation": "Before modernizing, add characterization tests around the most used features and the hotspots.",
+    "tags": [
+      "no-tests"
+    ],
+    "refs": []
+  },
+  {
+    "id": "DEBT-001",
+    "spec": "tech-debt",
+    "area": "tech-debt",
+    "title": "8 complex files change far more often than the rest",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 2370 branches, 1 commits"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 2370 branches, 1 commits"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 2370 branches, 1 commits"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/bootstrap.bundle.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 977 branches, 2 commits"
+      },
+      {
+        "file": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Scripts/bootstrap.bundle.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 977 branches, 2 commits"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 1883 branches, 1 commits"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 1883 branches, 1 commits"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "hotspot: 1883 branches, 1 commits"
+      }
+    ],
+    "technical_impact": "These files combine high branching with frequent edits: the places where defects and merge conflicts concentrate.",
+    "business_impact": "A small set of files absorbs most of the changes and most of the risk. Every new feature that touches them costs more and breaks more often.",
+    "effort": "L",
+    "recommendation": "Cover these files with tests first, then split them along their responsibilities before any larger migration.",
+    "tags": [
+      "hotspot"
+    ],
+    "refs": []
+  },
+  {
+    "id": "OPS-001",
+    "spec": "devops",
+    "area": "devops",
+    "title": "No continuous integration pipeline found",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "ServiceFabric/eShopModernizedMVC-ServiceFabricApp/packages.config",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      },
+      {
+        "file": "ServiceFabric/eShopModernizedSQL_ServiceFabricApp/packages.config",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      },
+      {
+        "file": "ServiceFabric/eShopModernizedWebForms-ServiceApp/packages.config",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "inventory"
+      }
+    ],
+    "technical_impact": "No CI definition (GitHub Actions, Azure Pipelines, Jenkins, GitLab…) builds or tests the code on each change.",
+    "business_impact": "Builds and releases depend on someone's machine and memory, which makes them slow and error-prone.",
+    "effort": "S",
+    "recommendation": "Add a pipeline that builds and runs the tests on every change.",
+    "tags": [
+      "ci"
+    ],
+    "refs": []
+  },
+  {
+    "id": "RSK-001",
+    "spec": "risk",
+    "area": "risk",
+    "title": "No changes since 2023-10-25",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": ".",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "git history"
+      }
+    ],
+    "technical_impact": "The last commit is more than two years old; the build tools and dependencies have likely drifted.",
+    "business_impact": "Nobody has changed this system in years. Even small fixes will first need someone to make it build and run again.",
+    "effort": "M",
+    "recommendation": "Before planning changes, prove the system still builds and runs in a clean environment.",
+    "tags": [
+      "dormant"
+    ],
+    "refs": []
+  },
+  {
+    "id": "SEC-005",
+    "spec": "security",
+    "area": "security",
+    "title": "Microsoft.IdentityModel.JsonWebTokens 5.6.0 has 1 known vulnerability, declared in 2 places",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config",
+        "line": 51,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config",
+        "line": 53,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-59j7-ghrg-fj52 for this exact version. Microsoft ASP.NET Core project templates vulnerable to denial of service",
+    "business_impact": "Microsoft.IdentityModel.JsonWebTokens 5.6.0, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade Microsoft.IdentityModel.JsonWebTokens to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-59j7-ghrg-fj52"
+    ]
+  },
+  {
+    "id": "SEC-006",
+    "spec": "security",
+    "area": "security",
+    "title": "System.IdentityModel.Tokens.Jwt 5.6.0 has 1 known vulnerability, declared in 2 places",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config",
+        "line": 97,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config",
+        "line": 98,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-59j7-ghrg-fj52 for this exact version. Microsoft ASP.NET Core project templates vulnerable to denial of service",
+    "business_impact": "System.IdentityModel.Tokens.Jwt 5.6.0, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade System.IdentityModel.Tokens.Jwt to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-59j7-ghrg-fj52"
+    ]
+  },
+  {
+    "id": "SEC-007",
+    "spec": "security",
+    "area": "security",
+    "title": "log4net 2.0.10 has 1 known vulnerability, declared in 5 places",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/packages.config",
+        "line": 10,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/packages.config",
+        "line": 11,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config",
+        "line": 11,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/eShopPorted/eShopPorted.csproj",
+        "line": 13,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj",
+        "line": 242,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-4f7c-pmjv-c25w for this exact version. Apache Log4net: Silent log event loss in XmlLayout and XmlLayoutSchemaLog4J due to unescaped XML 1.0 forbidden characters",
+    "business_impact": "log4net 2.0.10, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade log4net to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-4f7c-pmjv-c25w"
+    ]
+  },
+  {
+    "id": "SEC-008",
+    "spec": "security",
+    "area": "security",
+    "title": "log4net 2.0.12 has 1 known vulnerability",
+    "severity": "medium",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config",
+        "line": 10,
+        "end_line": null,
+        "excerpt": null,
+        "source": "osv.dev"
+      }
+    ],
+    "technical_impact": "OSV lists GHSA-4f7c-pmjv-c25w for this exact version. Apache Log4net: Silent log event loss in XmlLayout and XmlLayoutSchemaLog4J due to unescaped XML 1.0 forbidden characters",
+    "business_impact": "log4net 2.0.12, a library the system depends on, has publicly known security flaws. Attackers read these lists too.",
+    "effort": "S",
+    "recommendation": "Upgrade log4net to a version without these advisories and re-test the features that use it.",
+    "tags": [
+      "vulnerability"
+    ],
+    "refs": [
+      "https://osv.dev/vulnerability/GHSA-4f7c-pmjv-c25w"
+    ]
+  },
+  {
+    "id": "DEBT-002",
+    "spec": "tech-debt",
+    "area": "tech-debt",
+    "title": "10 source files exceed 1,500 lines of code",
+    "severity": "low",
+    "kind": "verified",
+    "confidence": "high",
+    "evidence": [
+      {
+        "file": "eShopModernizedMVCSolution/src/eShopModernizedMVC/Scripts/jquery-3.4.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "6987 lines"
+      },
+      {
+        "file": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Scripts/jquery-3.4.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "6987 lines"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "6877 lines"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "6877 lines"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "6877 lines"
+      },
+      {
+        "file": "eShopModernizedMVCSolution/src/eShopModernizedMVC/Scripts/jquery-3.4.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "5563 lines"
+      },
+      {
+        "file": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Scripts/jquery-3.4.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "5563 lines"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/eShopPorted/wwwroot/Scripts/jquery-3.3.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "5457 lines"
+      },
+      {
+        "file": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Scripts/jquery-3.3.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "5457 lines"
+      },
+      {
+        "file": "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/Scripts/jquery-3.3.1.slim.js",
+        "line": 0,
+        "end_line": null,
+        "excerpt": null,
+        "source": "5457 lines"
+      }
+    ],
+    "technical_impact": "Very large files usually hold several responsibilities, are hard to test and to review.",
+    "business_impact": "Some parts of the code are too big for one person to understand quickly, which slows every change.",
+    "effort": "M",
+    "recommendation": "Break these files apart when they are next changed, guided by tests.",
+    "tags": [
+      "size"
+    ],
+    "refs": []
+  }
+]

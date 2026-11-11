@@ -115,7 +115,16 @@ def vulnerabilities(deps: dict, net: Net, limit: int = 60) -> list[dict]:
         for d, res in zip(owners[start:start + 500], batch.get("results", [])):
             ids = [v["id"] for v in res.get("vulns", [])]
             if ids:
-                out.append({**{k: d[k] for k in ("ecosystem", "name", "version", "file", "line")}, "ids": ids})
+                out.append({**{k: d[k] for k in ("ecosystem", "name", "version", "file", "line", "scope")}, "ids": ids})
+    # One entry per package and version, with every manifest that declares it.
+    grouped: dict[tuple, dict] = {}
+    for item in out:
+        key = (item["ecosystem"], item["name"].lower(), item["version"])
+        g = grouped.setdefault(key, {**item, "declared_in": [], "scope": item.get("scope", "runtime")})
+        g["declared_in"].append({"file": item["file"], "line": item["line"]})
+        if item.get("scope") == "runtime":
+            g["scope"] = "runtime"
+    out = list(grouped.values())
     # Details (summary, severity) for the most affected packages only, to keep the run fast.
     for item in sorted(out, key=lambda x: -len(x["ids"]))[:limit]:
         details = []

@@ -1,0 +1,80 @@
+Summary,Description,Issue Type,Priority,Labels,Component,Story Points,Finding ID
+[ARC-001] Built on CICS,"Treat leaving CICS as its own track in the roadmap, screen by screen or service by service.
+
+Why: CICS online programs depend on the mainframe transaction monitor.
+
+Business impact: An important part of the system uses CICS, a technology that is hard to hire for and cannot be upgraded in place. Moving off it is a project, not an update.
+
+Evidence:
+- app/app-authorization-ims-db2-mq/cbl/COPAUA0C.cbl:226
+
+(verified, confidence high)",Task,High,archaeology architecture legacy-platform,architecture,21,ARC-001
+[TST-001] No automated tests were found,"Before modernizing, add characterization tests around the most used features and the hotspots.
+
+Why: 0 test files for 27,656 lines of source code. Regressions can only be caught by hand.
+
+Business impact: Nothing checks automatically that the system still works after a change. Every change, and especially a migration, needs slow manual testing and still risks breaking things.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,High,archaeology testing no-tests,testing,13,TST-001
+[DEBT-001] 8 complex files change far more often than the rest,"Cover these files with tests first, then split them along their responsibilities before any larger migration.
+
+Why: These files combine high branching with frequent edits: the places where defects and merge conflicts concentrate.
+
+Business impact: A small set of files absorbs most of the changes and most of the risk. Every new feature that touches them costs more and breaks more often.
+
+Evidence:
+- app/cbl/COACTUPC.cbl
+- app/app-transaction-type-db2/cbl/COTRTLIC.cbl
+- app/cbl/CBTRN01C.cbl
+- app/cbl/CBTRN02C.cbl
+- app/cbl/CBTRN03C.cbl
+- app/app-transaction-type-db2/cbl/COTRTUPC.cbl
+- app/cbl/CBACT04C.cbl
+- app/cbl/COCRDUPC.cbl
+
+(verified, confidence high)",Task,Medium,archaeology tech-debt hotspot,tech-debt,13,DEBT-001
+[OPS-001] No continuous integration pipeline found,"Add a pipeline that builds and runs the tests on every change.
+
+Why: No CI definition (GitHub Actions, Azure Pipelines, Jenkins, GitLab…) builds or tests the code on each change.
+
+Business impact: Builds and releases depend on someone's machine and memory, which makes them slow and error-prone.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,Medium,archaeology devops ci,devops,2,OPS-001
+"[DEBT-002] 3 source files exceed 1,500 lines of code","Break these files apart when they are next changed, guided by tests.
+
+Why: Very large files usually hold several responsibilities, are hard to test and to review.
+
+Business impact: Some parts of the code are too big for one person to understand quickly, which slows every change.
+
+Evidence:
+- app/cbl/COACTUPC.cbl
+- app/app-transaction-type-db2/cbl/COTRTLIC.cbl
+- app/app-transaction-type-db2/cbl/COTRTUPC.cbl
+
+(verified, confidence high)",Task,Low,archaeology tech-debt size,tech-debt,5,DEBT-002
+[OPS-002] No container or infrastructure-as-code definitions,"Describe the runtime in a Dockerfile or IaC as a first, low-risk modernization step.
+
+Why: The runtime environment is not described in code, so it cannot be recreated automatically.
+
+Business impact: Setting up a new server or a test environment is manual work that only a few people know how to do.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,Low,archaeology devops environment,devops,5,OPS-002
+[OPS-003] No logging or monitoring library detected,"Add structured logging and basic health metrics before any migration, to compare before and after.
+
+Why: No known logging, tracing or metrics library is declared in the manifests or configuration.
+
+Business impact: When something fails in production it is hard to know what happened or how often.
+
+Evidence:
+- .
+
+(verified, confidence high)",Task,Low,archaeology devops observability,devops,2,OPS-003

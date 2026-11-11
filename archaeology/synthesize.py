@@ -34,7 +34,7 @@ def status(findings: list[dict]) -> str:
 GENERIC = {"api", "v1", "v2", "v3", "actions", "action", "app", "index", "default", "src", "main", "webapp", "web-inf", "jsp",
            "pages", "views", "view", "includes", "include", "common", "shared", "static", "public", "new", "edit", "update",
            "delete", "remove", "add", "list", "show", "form", "home", "page", "get", "post", "put", "detail", "details",
-           "create", "save", "search", "admin", "login", "logout", "error", "test", "resources", "content", "scripts", "root"}
+           "create", "save", "search", "admin", "login", "logout", "error", "test", "resources", "content", "scripts", "root", "controller", "controllers", "handler", "service"}
 
 
 def _name(text: str) -> str | None:

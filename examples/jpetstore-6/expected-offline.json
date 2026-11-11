@@ -1,0 +1,3 @@
+[
+  "tech-debt | medium | 8 complex files change far more often than the rest | .mvn/wrapper/MavenWrapperDownloader.java, src/main/java/org/mybatis/jpetstore/service/OrderService.java, src/test/java/org/mybatis/jpetstore/ScreenTransitionIT.java, src/test/java/org/mybatis/jpetstore/domain/CartTest.java, src/test/java/org/mybatis/jpetstore/service/AccountServiceTest.java, src/test/java/org/mybatis/jpetstore/service/CatalogServiceTest.java, src/test/java/org/mybatis/jpetstore/service/OrderServiceTest.java, src/test/java/org/mybatis/jpetstore/web/controllers/CartControllerTest.java"
+]
